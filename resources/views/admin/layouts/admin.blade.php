@@ -47,7 +47,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@yield('title', 'SMAN 1 YOGYAKARTA', )</title>
+    <title>@yield('title', 'MTsN 7 Tasikmalaya', )</title>
     <link rel="icon" type="image/png" href="{{ asset('assets/foto/tel.png') }}">
 
     <!-- Bootstrap -->

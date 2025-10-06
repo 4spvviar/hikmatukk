@@ -219,7 +219,7 @@
 @endif
 
 <!-- Data Guru & Siswa -->
-<section class="py-5" style="background:#002147;">
+<section class="py-5" style="background:#004715;">
     <div class="container">
         <h2 class="text-center mb-4 fw-bold text-white">Data Guru Dan Siswa</h2>
         <div class="row justify-content-center g-4">
@@ -305,7 +305,7 @@
 }
 .banner-area {
     position: relative;
-    background-image: url('https://sman1yogya.sch.id/assets/images/bg_home1.JPG');
+    background-image: url('/assets/foto/mts7.jpeg');
     background-size: cover;
     background-position: center;
     background-attachment: fixed;

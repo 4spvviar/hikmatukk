@@ -10,7 +10,7 @@
         body {
             margin: 0;
             height: 100vh;
-            background: linear-gradient(135deg, #0d47a1 0%, #2575fc 100%);
+            background: linear-gradient(135deg, #0d47a1 0%, #25fc66 100%);
             background-repeat: no-repeat;
             background-attachment: fixed;
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -102,7 +102,7 @@
 </head>
 <body>
     <div class="login-container">
-        <img src="{{ asset('assets/foto/nnn.png') }}" alt="Login Image" />
+        <img src="{{ asset('assets/foto/mts tercinta.png') }}" alt="Login Image" />
         <h2>Login</h2>
         <form action="{{ route('auth') }}" method="POST">
             @csrf

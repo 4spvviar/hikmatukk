@@ -143,6 +143,6 @@
     </ul>
 
     <div class="sidebar-footer">
-        SMA NEGERI 1 YOGYAKARTA @1996
+        MTsN 7 Tasikmalaya @1996
     </div>
 </div>

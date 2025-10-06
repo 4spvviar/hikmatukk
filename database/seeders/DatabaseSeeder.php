@@ -29,19 +29,19 @@ class DatabaseSeeder extends Seeder
             'role' => 'operator'
         ]);
         profile_sekolah::create([
-            'nama_sekolah' => 'SMK Kapal',
-            'kepala_sekolah' => 'Budi Santoso',
+            'nama_sekolah' => 'MTsN 7 Tasikmalaya',
+            'kepala_sekolah' => 'Iki Alpian Hilmi',
             'foto'=>'logo.jpg',
-            'logo'=>'nnn.jpg',
+            'logo'=>'mts7.jpeg',
             'npsn' => '1234567890',
-            'alamat' => 'Jl. Pendidikan No. 123, Kota Pendidikan',
+            'alamat' => 'Kompleks Ponpes Al Manshuriyah No.335 Kampung Nanggerang, RT.027/RW.04, Kec. Salawu, Kabupaten Tasikmalaya',
             'kontak' => '021-12345678',
             'visi_misi' => 'Visi: Menjadi sekolah unggulan dalam bidang teknologi dan inovasi. Misi: 1. Meningkatkan kualitas pembelajaran. 2. Mengembangkan potensi siswa. 3. Membangun kerjasama dengan industri.',
             'tahun_berdiri' => 1996,
-            'deskripsi' => 'SMK Kapal adalah sekolah menengah kejuruan yang berfokus pada pengembangan keterampilan teknis dan vokasional untuk mempersiapkan siswa menghadapi dunia kerja.',
+            'deskripsi' => 'Pada saat ini MTsN 7 Tasikmalaya merupakan satu-satunya MTs  Negeri di kecamatan Salawu. Ditinjau dari segi strategis sosial-ekonomi menunjukan bahwa MTsN 7 Tasikmalaya terletak di lingkungan  pedesaan dan berada di lingkungan masyarakat yang taraf ekonominya menengah kebawah serta berada di lingkungan Pondok  Pesantren . Hal ini dapat dimanfaatkan sebagai pusat-pusat sumber belajar peserta didik dalam menambah wawasan pengetahuan dan  mengembangkan kecapakan hidup (life skill)',
             'created_at' => now(),
             'updated_at' => now()
-           
+
         ]);
 
     }
