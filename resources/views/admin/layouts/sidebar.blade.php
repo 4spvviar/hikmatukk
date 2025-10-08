@@ -7,14 +7,14 @@
     .sidebar{
       width:260px;
       min-height:100vh;
-      background:#002147;
+      background:#ffffff;
       border-right:1px solid #e4e6eb;
       display:flex;
       flex-direction:column;
     }
     /* Header biru */
     .sidebar-header{
-      background:#002147;
+      background:#0da150;
       color:#fff;
       padding:1.5rem 1rem;
       display:flex;
@@ -97,7 +97,7 @@
         @else
             <span class="badge bg-secondary">Tidak ada</span>
         @endif --}}
-        <img src="{{ asset('assets/foto/ded.png') }}" alt="Foto" width="50" height="50" class="rounded-circle">
+        <img src="{{ asset('assets/foto/mts tercinta.png') }}" alt="Foto" width="50" height="50" class="rounded-circle">
         <span>RuangAdmin</span>
     </div>
 

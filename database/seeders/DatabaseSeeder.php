@@ -17,13 +17,13 @@ class DatabaseSeeder extends Seeder
         // User::factory(10)->create();
 
         User::create([
-            'name' => 'Dodoy',
-            'username' => 'AdminKapal',
+            'name' => 'Hikmat',
+            'username' => 'AdminMts',
             'password' => bcrypt(1234),
             'role' => 'admin'
         ]);
         User::create([
-            'name' => 'kodoy',
+            'name' => 'Tiara Sani',
             'username' => 'Operator1',
             'password' => bcrypt(12345),
             'role' => 'operator'

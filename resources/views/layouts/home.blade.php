@@ -23,7 +23,7 @@
         <div class="row align-items-center">
             <div class="col-lg-6 text-center mb-4 mb-lg-0">
                 @if($profile->foto)
-                    <img src="{{ asset('storage/' . $profile->foto) }}"
+                    <img src="{{ asset('assets/' . $profile->foto) }}"
                          alt="Foto Sekolah"
                          class="img-fluid rounded shadow">
                 @endif
