@@ -5,16 +5,16 @@
             {{-- Logo & Deskripsi --}}
             <div class="col-12 col-md-6 col-lg-4">
                 <div class="d-flex align-items-center mb-3">
-                    @if($profile->logo)
+                    @if($profile && $profile->logo)
                         <img src="{{ asset('storage/' . $profile->logo) }}"
                              alt="Logo Sekolah"
                              height="70"
                              class="me-3">
                     @endif
-                    <h5 class="fw-bold m-0">{{ $profile->nama_sekolah }}</h5>
+                    <h5 class="fw-bold m-0">{{ $profile && $profile->nama_sekolah }}</h5>
                 </div>
 
-                @if ($profile->deskripsi)
+                @if ($profile && $profile->deskripsi)
                     <p>{{ $profile->deskripsi }}</p>
                 @endif
 

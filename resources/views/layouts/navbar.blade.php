@@ -11,7 +11,7 @@
             @endif
 
             <span class="school-name">
-                {{ $profile->nama_sekolah }}
+                {{ $profile->nama_sekolah ?? 'MtsN 7 Tasikmalaya' }}
             </span>
         </a>
 

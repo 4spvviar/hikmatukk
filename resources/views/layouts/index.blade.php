@@ -11,7 +11,7 @@
 </head>
 <body>
     {{-- Navbar --}}
-    @include('layouts.navbar')
+    @include('layouts.navbar', ['profile' => $profile])
 
     {{-- Hero Section --}}
     @yield('hero')
