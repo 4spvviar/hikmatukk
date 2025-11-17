@@ -9,7 +9,10 @@
             @else
                 <img src="{{ asset('assets/foto/nnn.png') }}" alt="Logo" height="50" class="me-2">
             @endif
-            <span class="school-name">{{ $profile->nama_sekolah }}</span>
+
+            <span class="school-name">
+                {{ $profile->nama_sekolah }}
+            </span>
         </a>
 
         <!-- Toggle Button untuk Mobile -->
