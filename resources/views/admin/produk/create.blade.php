@@ -6,32 +6,32 @@
         <div class="col-md-8">
             <div class="card shadow-sm border-0">
                 <div class="card-header bg-primary text-white">
-                    <h5 class="mb-0">Tambah Ekstrakulikuler</h5>
+                    <h5 class="mb-0">Tambah Produk</h5>
                 </div>
                 <div class="card-body">
-                    <form action="{{ route('admin.ekstrakulikuler.store') }}" method="POST" enctype="multipart/form-data">
+                    <form action="{{ route('admin.produk.store') }}" method="POST" enctype="multipart/form-data">
                         @csrf
 
                         <div class="mb-3">
-                            <label for="nama_ekskul" class="form-label">Nama Ekskul</label>
-                            <input type="text" class="form-control @error('nama_ekskul') is-invalid @enderror" id="nama_ekskul" name="nama_ekskul" value="{{ old('nama_ekskul') }}" required>
-                            @error('nama_ekskul')
+                            <label for="nama_produk" class="form-label">Nama Produk</label>
+                            <input type="text" class="form-control @error('nama_produk') is-invalid @enderror" id="nama_produk" name="nama_produk" value="{{ old('nama_produk') }}" required>
+                            @error('nama_produk')
                                 <div class="invalid-feedback">{{ $message }}</div>
                             @enderror
                         </div>
 
                         <div class="mb-3">
-                            <label for="pembina" class="form-label">Pembina</label>
-                            <input type="text" class="form-control @error('pembina') is-invalid @enderror" id="pembina" name="pembina" value="{{ old('pembina') }}" required>
-                            @error('pembina')
+                            <label for="harga" class="form-label">Harga</label>
+                            <input type="text" class="form-control @error('harga') is-invalid @enderror" id="harga" name="harga" value="{{ old('harga') }}" required>
+                            @error('harga')
                                 <div class="invalid-feedback">{{ $message }}</div>
                             @enderror
                         </div>
 
                         <div class="mb-3">
-                            <label for="jadwal_latihan" class="form-label">Jadwal Latihan</label>
-                            <input type="text" class="form-control @error('jadwal_latihan') is-invalid @enderror" id="jadwal_latihan" name="jadwal_latihan" value="{{ old('jadwal_latihan') }}" required>
-                            @error('jadwal_latihan')
+                            <label for="stok" class="form-label">Stok</label>
+                            <input type="text" class="form-control @error('stok') is-invalid @enderror" id="stok" name="stok" value="{{ old('stok') }}" required>
+                            @error('stok')
                                 <div class="invalid-feedback">{{ $message }}</div>
                             @enderror
                         </div>
@@ -53,7 +53,7 @@
                         </div>
 
                         <div class="d-flex justify-content-between">
-                            <a href="{{ route('admin.ekstrakulikuler.index') }}" class="btn btn-secondary">Kembali</a>
+                            <a href="{{ route('admin.produk.index') }}" class="btn btn-secondary">Kembali</a>
                             <button type="submit" class="btn btn-primary">Simpan</button>
                         </div>
                     </form>

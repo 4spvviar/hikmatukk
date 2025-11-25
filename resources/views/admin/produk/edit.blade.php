@@ -6,33 +6,33 @@
         <div class="col-md-8">
             <div class="card shadow-sm border-0">
                 <div class="card-header bg-primary text-dark">
-                    <h5 class="mb-0">Edit Ekstrakulikuler</h5>
+                    <h5 class="mb-0">Edit Produk</h5>
                 </div>
                 <div class="card-body">
-                    <form action="{{ route('admin.ekstrakulikuler.update', Crypt::encrypt($ekstrakulikuler->id_ekskul)) }}" method="POST" enctype="multipart/form-data">
+                    <form action="{{ route('admin.produk.update', Crypt::encrypt($produk->id_produk)) }}" method="POST" enctype="multipart/form-data">
                         @csrf
                         @method('PUT')
 
                         <div class="mb-3">
-                            <label for="nama_ekskul" class="form-label">Nama Ekskul</label>
-                            <input type="text" class="form-control @error('nama_ekskul') is-invalid @enderror" id="nama_ekskul" name="nama_ekskul" value="{{ old('nama_ekskul', $ekstrakulikuler->nama_ekskul) }}" required>
-                            @error('nama_ekskul')
+                            <label for="nama_produk" class="form-label">Nama Produk</label>
+                            <input type="text" class="form-control @error('nama_produk') is-invalid @enderror" id="nama_produk" name="nama_produk" value="{{ old('nama_produk', $produk->nama_produk) }}" required>
+                            @error('nama_produk')
                                 <div class="invalid-feedback">{{ $message }}</div>
                             @enderror
                         </div>
 
                         <div class="mb-3">
-                            <label for="pembina" class="form-label">Pembina</label>
-                            <input type="text" class="form-control @error('pembina') is-invalid @enderror" id="pembina" name="pembina" value="{{ old('pembina', $ekstrakulikuler->pembina) }}" required>
-                            @error('pembina')
+                            <label for="harga" class="form-label">Harga</label>
+                            <input type="text" class="form-control @error('harga') is-invalid @enderror" id="harga" name="harga" value="{{ old('harga', $produk->harga) }}" required>
+                            @error('harga')
                                 <div class="invalid-feedback">{{ $message }}</div>
                             @enderror
                         </div>
 
                         <div class="mb-3">
-                            <label for="jadwal_latihan" class="form-label">Jadwal Latihan</label>
-                            <input type="text" class="form-control @error('jadwal_latihan') is-invalid @enderror" id="jadwal_latihan" name="jadwal_latihan" value="{{ old('jadwal_latihan', $ekstrakulikuler->jadwal_latihan) }}" required>
-                            @error('jadwal_latihan')
+                            <label for="stok" class="form-label">Stok</label>
+                            <input type="text" class="form-control @error('stok') is-invalid @enderror" id="stok" name="stok" value="{{ old('stok', $produk->stok) }}" required>
+                            @error('stok')
                                 <div class="invalid-feedback">{{ $message }}</div>
                             @enderror
                         </div>
@@ -47,9 +47,9 @@
 
                         <div class="mb-3">
                             <label for="gambar" class="form-label">Gambar</label>
-                            @if($ekstrakulikuler->gambar)
+                            @if($produk->gambar)
                                 <div class="mb-2">
-                                    <img src="{{ asset('storage/' . $ekstrakulikuler->gambar) }}" alt="Gambar Lama" width="100" height="100" class="rounded">
+                                    <img src="{{ asset('storage/' . $produk->gambar) }}" alt="Gambar Lama" width="100" height="100" class="rounded">
                                 </div>
                             @endif
                             <input type="file" class="form-control @error('gambar') is-invalid @enderror" id="gambar" name="gambar" accept="image/*">
@@ -60,7 +60,7 @@
                         </div>
 
                         <div class="d-flex justify-content-between">
-                            <a href="{{ route('admin.ekstrakulikuler.index') }}" class="btn btn-secondary">Kembali</a>
+                            <a href="{{ route('admin.produk.index') }}" class="btn btn-secondary">Kembali</a>
                             <button type="submit" class="btn btn-primary">Simpan</button>
                         </div>
                     </form>

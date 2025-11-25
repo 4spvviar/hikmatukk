@@ -4,8 +4,10 @@ namespace App\Http\Controllers;
 
 use App\Models\Berita;
 use App\Models\Galeri;
+use App\Models\GambarProduk;
 use App\Models\Siswa;
-use App\Models\Ekstrakulikuler;
+use App\Models\Produk;;
+use App\Models\Kategori;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Contracts\Encryption\DecryptException;
 use Illuminate\Http\Request;
@@ -15,126 +17,45 @@ class OperatorController extends Controller
 {
     //
     public function dashboard(){
-        $countSiswa = Siswa::count();
-        $countEkstrakulikuler = Ekstrakulikuler::count();
+        $countKategori = Kategori::count();
+        $countProduk = Produk::count();
         $countGaleri = Galeri::count();
-        $countBerita = Berita::count();
+        $countGambarProduk = GambarProduk::count();
 
         return view('operator.dashboard', compact(
-            'countSiswa',
-            'countEkstrakulikuler',
+            'countKategori',
+            'countProduk',
             'countGaleri',
-            'countBerita'
+            'countGambarProduk'
         ));
     }
 
-    //----siswa----
-    public function siswaIndex()
+    //----kategori----
+    public function kategoriIndex()
     {
-        $siswas = Siswa::all();
-        return view('operator.siswa.index', compact('siswas'));
+        $kategoris = Kategori::all();
+        return view('operator.kategori.index', compact('kategoris'));
     }
 
-    public function siswaCreate()
+    public function kategoriCreate()
     {
-        return view('operator.siswa.create');
+        return view('operator.kategori.create');
     }
 
-    public function siswaStore(Request $request)
+    public function kategoriStore(Request $request)
     {
         $validated = $request->validate([
-            'nisn' => 'required|string|max:10|unique:siswas,nisn',
-            'nama_siswa' => 'required|string|max:40',
-            'jenis_kelamin' => 'required|in:Laki-laki,Perempuan',
-            'tahun_masuk' => 'required|integer|min:1900|max:' . (date('Y') + 1),
-        ]);
-
-        Siswa::create($validated);
-
-        return redirect()->route('operator.siswa.index')->with('success', 'Siswa berhasil ditambahkan.');
-    }
-
-    public function siswaEdit(string $id)
-    {
-        try {
-            $id = Crypt::decrypt($id);
-        } catch (DecryptException $e) {
-            return redirect()->back()->with('danger', 'ID tidak valid.');
-        }
-
-        $siswa = Siswa::findOrFail($id);
-        return view('operator.siswa.edit', compact('siswa'));
-    }
-
-    public function siswaUpdate(Request $request, string $id)
-    {
-        try {
-            $id = Crypt::decrypt($id);
-        } catch (DecryptException $e) {
-            return redirect()->back()->with('danger', 'ID tidak valid.');
-        }
-
-        $siswa = Siswa::findOrFail($id);
-
-        $validated = $request->validate([
-            'nisn' => 'required|string|max:10|unique:siswas,nisn,' . $siswa->getKey() . ',id_siswa',
-            'nama_siswa' => 'required|string|max:40',
-            'jenis_kelamin' => 'required|in:Laki-laki,Perempuan',
-            'tahun_masuk' => 'required|integer|min:1900|max:' . (date('Y') + 1),
-        ]);
-
-        $siswa->update($validated);
-
-        return redirect()->route('operator.siswa.index')->with('success', 'Siswa berhasil diupdate.');
-    }
-
-    public function siswaDestroy(string $id)
-    {
-        try {
-            $id = Crypt::decrypt($id);
-        } catch (DecryptException $e) {
-            return redirect()->back()->with('danger', 'ID tidak valid.');
-        }
-
-        $siswa = Siswa::findOrFail($id);
-        $siswa->delete();
-
-        return redirect()->route('operator.siswa.index')->with('success', 'Siswa berhasil dihapus.');
-    }
-
-    //----ekstrakulikuler----
-    public function ekstrakulikulerIndex()
-    {
-        $ekstrakulikulers = Ekstrakulikuler::all();
-        return view('operator.ekstrakulikuler.index', compact('ekstrakulikulers'));
-    }
-
-    public function ekstrakulikulerCreate()
-    {
-        return view('operator.ekstrakulikuler.create');
-    }
-
-    public function ekstrakulikulerStore(Request $request)
-    {
-        $validated = $request->validate([
-            'nama_ekskul' => 'required|string|max:40',
-            'pembina' => 'required|string|max:40',
-            'jadwal_latihan' => 'required|string|max:100',
+            'nama_kategori' => 'required|string|max:40|unique:kategoris,nama_kategori',
             'deskripsi' => 'nullable|string',
-            'gambar' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:20240',
+
         ]);
 
-        if ($request->hasFile('gambar')) {
-            $gambarPath = $request->file('gambar')->store('ekstrakulikuler_gambar', 'public');
-            $validated['gambar'] = $gambarPath;
-        }
+        Kategori::create($validated);
 
-        Ekstrakulikuler::create($validated);
-
-        return redirect()->route('operator.ekstrakulikuler.index')->with('success', 'Ekstrakulikuler berhasil ditambahkan.');
+        return redirect()->route('operator.kategori.index')->with('success', 'Kategori berhasil ditambahkan.');
     }
 
-    public function ekstrakulikulerEdit(string $id)
+    public function kategoriEdit(string $id)
     {
         try {
             $id = Crypt::decrypt($id);
@@ -142,11 +63,11 @@ class OperatorController extends Controller
             return redirect()->back()->with('danger', 'ID tidak valid.');
         }
 
-        $ekstrakulikuler = Ekstrakulikuler::findOrFail($id);
-        return view('operator.ekstrakulikuler.edit', compact('ekstrakulikuler'));
+        $kategori = Kategori::findOrFail($id);
+        return view('operator.kategori.edit', compact('kategori'));
     }
 
-    public function ekstrakulikulerUpdate(Request $request, string $id)
+    public function kategoriUpdate(Request $request, string $id)
     {
         try {
             $id = Crypt::decrypt($id);
@@ -154,27 +75,70 @@ class OperatorController extends Controller
             return redirect()->back()->with('danger', 'ID tidak valid.');
         }
 
-        $ekstrakulikuler = Ekstrakulikuler::findOrFail($id);
+        $kategori = Kategori::findOrFail($id);
 
         $validated = $request->validate([
-            'nama_ekskul' => 'required|string|max:40',
-            'pembina' => 'required|string|max:40',
-            'jadwal_latihan' => 'required|string|max:100',
+            'nama_kategori' => 'required|string|max:40|unique:kategoris,nama_kategori,' . $kategori->getKey() . ',id',
             'deskripsi' => 'nullable|string',
+
+        ]);
+
+        $kategori->update($validated);
+
+        return redirect()->route('operator.kategori.index')->with('success', 'Kategori berhasil diupdate.');
+    }
+
+    public function kategoriDestroy(string $id)
+    {
+        try {
+            $id = Crypt::decrypt($id);
+        } catch (DecryptException $e) {
+            return redirect()->back()->with('danger', 'ID tidak valid.');
+        }
+
+        $kategori = Kategori::findOrFail($id);
+        $kategori->delete();
+
+        return redirect()->route('operator.kategori.index')->with('success', 'Kategori berhasil dihapus.');
+    }
+
+    //----Produk----
+    public function produkIndex()
+    {
+        $produks = Produk::all();
+        return view('operator.produk.index', compact('produks'));
+    }
+
+    public function produkCreate()
+    {
+        return view('operator.produk.create');
+    }
+
+    public function produkStore(Request $request)
+    {
+        $validated = $request->validate([
+            'id_produk' => 'required|string|max:20|unique:produks,id_produk',
+            'nama_produk' => 'required|string|max:100',
+            'id_kategori' => 'required|exists:kategoris,id',
+            'id_toko' => 'required|exists:tokos,id',
+            'harga' => 'required|numeric|min:0',
+            'stok' => 'required|integer|min:0',
+            'deskripsi' => 'nullable|string',
+            'tanggal_upload' => 'required|date',
             'gambar' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
         ]);
 
         if ($request->hasFile('gambar')) {
-            $gambarPath = $request->file('gambar')->store('ekstrakulikuler_gambar', 'public');
+            $gambarPath = $request->file('gambar')->store('produk_gambar', 'public');
             $validated['gambar'] = $gambarPath;
         }
 
-        $ekstrakulikuler->update($validated);
+        Produk::create($validated);
 
-        return redirect()->route('operator.ekstrakulikuler.index')->with('success', 'Ekstrakulikuler berhasil diupdate.');
+        return redirect()->route('operator.produk.index')->with('success', 'Produk berhasil ditambahkan.');
     }
 
-    public function ekstrakulikulerDestroy(string $id)
+    public function produkEdit(string $id)
     {
         try {
             $id = Crypt::decrypt($id);
@@ -182,48 +146,91 @@ class OperatorController extends Controller
             return redirect()->back()->with('danger', 'ID tidak valid.');
         }
 
-        $ekstrakulikuler = Ekstrakulikuler::findOrFail($id);
-        $ekstrakulikuler->delete();
-
-        return redirect()->route('operator.ekstrakulikuler.index')->with('success', 'Ekstrakulikuler berhasil dihapus.');
+        $produk = Produk::findOrFail($id);
+        return view('operator.produk.edit', compact('produk'));
     }
 
-    //----berita----
+    public function produkUpdate(Request $request, string $id)
+    {
+        try {
+            $id = Crypt::decrypt($id);
+        } catch (DecryptException $e) {
+            return redirect()->back()->with('danger', 'ID tidak valid.');
+        }
+
+        $produk = Produk::findOrFail($id);
+
+        $validated = $request->validate([
+            'id_produk' => 'required|string|max:20|unique:produks,id_produk,' . $produk->getKey() . ',id_produk',
+            'nama_produk' => 'required|string|max:100',
+            'id_kategori' => 'required|exists:kategoris,id',
+            'id_toko' => 'required|exists:tokos,id',
+            'harga' => 'required|numeric|min:0',
+            'stok' => 'required|integer|min:0',
+            'deskripsi' => 'nullable|string',
+            'tanggal_upload' => 'required|date',
+            'gambar' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+        ]);
+
+        if ($request->hasFile('gambar')) {
+            $gambarPath = $request->file('gambar')->store('produk_gambar', 'public');
+            $validated['gambar'] = $gambarPath;
+        }
+
+        $produk->update($validated);
+
+        return redirect()->route('operator.produk.index')->with('success', 'Produk berhasil diupdate.');
+    }
+
+    public function produkDestroy(string $id)
+    {
+        try {
+            $id = Crypt::decrypt($id);
+        } catch (DecryptException $e) {
+            return redirect()->back()->with('danger', 'ID tidak valid.');
+        }
+
+        $produk = Produk::findOrFail($id);
+        $produk->delete();
+
+        return redirect()->route('operator.produk.index')->with('success', 'Produk berhasil dihapus.');
+    }
+
+    //----gambarproduk----
     public function beritaIndex()
     {
-        $beritas = Berita::with('user')->get();
-        return view('operator.berita.index', compact('beritas'));
+        $gambarproduks = GambarProduk::with('user')->get();
+        return view('operator.gambarproduk.index', compact('gambarproduks'));
     }
 
-    public function beritaCreate()
+    public function gambarprodukCreate()
     {
-        return view('operator.berita.create');
+        return view('operator.gambarproduk.create');
     }
 
-    public function beritaStore(Request $request)
+    public function gambarprodukStore(Request $request)
     {
         $validated = $request->validate([
-            'judul' => 'required|string|max:50',
-            'isi' => 'required|string',
-            'tanggal' => 'required|date',
-            'gambar' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'id_gambar' => 'required|string|max:20|unique:gambarproduks,id_gambar',
+            'id_produk' => 'required|exists:produks,id_produk',
+            'nama_gambar' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
         ]);
 
-        $data = $request->only(['judul', 'isi', 'tanggal']);
+        $data = $request->only(['id_gambar', 'id_produk']);
         $data['id_user'] = Auth::user()->id_user;
 
         if ($request->hasFile('gambar')) {
-            $file = $request->file('gambar');
+            $file = $request->file('nama_gambar');
             $filename = time() . '_' . $file->getClientOriginalName();
-            $file->storeAs('berita_gambar', $filename, 'public');
-            $data['gambar'] = 'berita_gambar/' . $filename;
+            $file->storeAs('gambarproduk', $filename, 'public');
+            $data['nama_gambar'] = 'gambarproduk/' . $filename;
         }
 
-        Berita::create($data);
-        return redirect()->route('operator.berita.index')->with('success', 'Berita berhasil ditambahkan.');
+        GambarProduk::create($data);
+        return redirect()->route('operator.gambarproduk.index')->with('success', 'Gambar Produk berhasil ditambahkan.');
     }
 
-    public function beritaEdit(string $id)
+    public function gambarprodukEdit(string $id)
     {
         try {
             $id = Crypt::decrypt($id);
@@ -231,11 +238,11 @@ class OperatorController extends Controller
             return redirect()->back()->with('danger', 'ID tidak valid.');
         }
 
-        $berita = Berita::findOrFail($id);
-        return view('operator.berita.edit', compact('berita'));
+        $gambarproduk = GambarProduk::findOrFail($id);
+        return view('operator.gambarproduk.edit', compact('gambarproduk'));
     }
 
-    public function beritaUpdate(Request $request, string $id)
+    public function gambarprodukUpdate(Request $request, string $id)
     {
         try {
             $id = Crypt::decrypt($id);
@@ -243,33 +250,32 @@ class OperatorController extends Controller
             return redirect()->back()->with('danger', 'ID tidak valid.');
         }
 
-        $berita = Berita::findOrFail($id);
+        $gambarproduk = GambarProduk::findOrFail($id);
 
         $validated = $request->validate([
-            'judul' => 'required|string|max:50',
-            'isi' => 'required|string',
-            'tanggal' => 'required|date',
-            'gambar' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'id_gambar' => 'required|string|max:20|unique:gambarproduks,id_gambar,' . $gambarproduk->getKey() . ',id_gambar',
+            'id_produk' => 'required|exists:produks,id_produk',
+            'nama_gambar' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
         ]);
 
-        $data = $request->only(['judul', 'isi', 'tanggal']);
+        $data = $request->only(['id_gambar', 'id_produk']);
 
-        if ($request->hasFile('gambar')) {
+        if ($request->hasFile('nama_gambar')) {
             // Delete old image
-            if ($berita->gambar && file_exists(storage_path('app/public/' . $berita->gambar))) {
-                unlink(storage_path('app/public/' . $berita->gambar));
+            if ($gambarproduk->nama_gambar && file_exists(storage_path('app/public/' . $gambarproduk->nama_gambar))) {
+                unlink(storage_path('app/public/' . $gambarproduk->nama_gambar));
             }
-            $file = $request->file('gambar');
+            $file = $request->file('nama_gambar');
             $filename = time() . '_' . $file->getClientOriginalName();
-            $file->storeAs('berita_gambar', $filename, 'public');
-            $data['gambar'] = 'berita_gambar/' . $filename;
+            $file->storeAs('gambarproduk', $filename, 'public');
+            $data['nama_gambar'] = 'gambarproduk/' . $filename;
         }
 
-        $berita->update($data);
-        return redirect()->route('operator.berita.index')->with('success', 'Berita berhasil diperbarui.');
+        $gambarproduk->update($data);
+        return redirect()->route('operator.gambarproduk.index')->with('success', 'Gambar Produk berhasil diperbarui.');
     }
 
-    public function beritaDestroy(string $id)
+    public function gambarprodukDestroy(string $id)
     {
         try {
             $id = Crypt::decrypt($id);
@@ -277,12 +283,12 @@ class OperatorController extends Controller
             return redirect()->back()->with('danger', 'ID tidak valid.');
         }
 
-        $berita = Berita::findOrFail($id);
-        if ($berita->gambar && file_exists(storage_path('app/public/' . $berita->gambar))) {
-            unlink(storage_path('app/public/' . $berita->gambar));
+        $gambarproduk = GambarProduk::findOrFail($id);
+        if ($gambarproduk->nama_gambar && file_exists(storage_path('app/public/' . $gambarproduk->nama_gambar))) {
+            unlink(storage_path('app/public/' . $gambarproduk->nama_gambar));
         }
-        $berita->delete();
-        return redirect()->route('operator.berita.index')->with('success', 'Berita berhasil dihapus.');
+        $gambarproduk->delete();
+        return redirect()->route('operator.gambarproduk.index')->with('success', 'Gambar Produk berhasil dihapus.');
     }
 
     //---galeri---

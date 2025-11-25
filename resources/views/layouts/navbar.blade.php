@@ -29,17 +29,17 @@
                     <a class="nav-link text-dark fw-bold" href="{{ route('layouts.home') }}">Home</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link text-dark fw-bold" href="{{ route('layouts.guru') }}">Guru</a>
+                    <a class="nav-link text-dark fw-bold" href="{{ route('layouts.guru') }}">Kategori</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link text-dark fw-bold" href="{{ route('layouts.galeri') }}">Galeri</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link text-dark fw-bold" href="{{ route('layouts.ektrakulikuler') }}">Ekstrakulikuler</a>
+                    <a class="nav-link text-dark fw-bold" href="{{ route('layouts.ektrakulikuler') }}">Produk</a>
                 </li>
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle text-dark fw-bold" href="#" id="profilDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                          Profile Sekolah
+                          Profile
                         </a>
                         <ul class="dropdown-menu shadow rounded" aria-labelledby="profilDropdown">
                           <li>

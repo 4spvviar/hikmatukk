@@ -6,10 +6,10 @@
         <div class="col-md-8">
             <div class="card shadow-sm border-0">
                 <div class="card-header bg-primary text-white">
-                    <h5 class="mb-0">Tambah Siswa</h5>
+                    <h5 class="mb-0">Tambah Kategori</h5>
                 </div>
                 <div class="card-body">
-                    <form action="{{ route('operator.siswa.store') }}" method="POST">
+                    <form action="{{ route('operator.kategori.store') }}" method="POST">
                         @csrf
                         <div class="mb-3">
                             <label for="nisn" class="form-label">NISN</label>

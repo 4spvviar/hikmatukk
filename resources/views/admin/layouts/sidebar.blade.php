@@ -14,7 +14,7 @@
     }
     /* Header biru */
     .sidebar-header{
-      background:#0da150;
+      background:#1196ad;
       color:#fff;
       padding:1.5rem 1rem;
       display:flex;
@@ -97,7 +97,7 @@
         @else
             <span class="badge bg-secondary">Tidak ada</span>
         @endif --}}
-        <img src="{{ asset('assets/foto/mts tercinta.png') }}" alt="Foto" width="50" height="50" class="rounded-circle">
+        <img src="{{ asset('assets/foto/shop (2).png') }}" alt="Foto" width="50" height="50" class="rounded-circle">
         <span>RuangAdmin</span>
     </div>
 
@@ -114,22 +114,22 @@
             <a class="nav-link" href="{{ route('admin.user.index') }}"><i class="bi bi-person-circle"></i> User</a>
         </li>
         <li>
-            <a class="nav-link" href="{{ route('admin.siswa.index') }}"><i class="bi bi-person"></i> Siswa</a>
+            <a class="nav-link" href="{{ route('admin.kategori.index') }}"><i class="bi bi-person"></i> Kategori</a>
         </li>
         <li>
-            <a class="nav-link" href="{{ route('admin.guru.index') }}"><i class="bi bi-person-badge"></i> Guru</a>
+            <a class="nav-link" href="{{ route('admin.toko.index') }}"><i class="bi bi-person-badge"></i> Toko</a>
         </li>
         <li>
-            <a class="nav-link" href="{{ route('admin.ekstrakulikuler.index') }}"><i class="bi bi-trophy"></i> Ekstrakulikuler</a>
+            <a class="nav-link" href="{{ route('admin.produk.index') }}"><i class="bi bi-trophy"></i> Produk</a>
         </li>
         <li>
             <a class="nav-link" href="{{ route('admin.galeri.index') }}"><i class="bi bi-images"></i> Galeri</a>
         </li>
         <li>
-          <a class="nav-link" href="{{ route('admin.berita.index') }}"><i class="bi bi-newspaper"></i> Berita</a>
+          <a class="nav-link" href="{{ route('admin.gambarProduk.index') }}"><i class="bi bi-newspaper"></i> Gambar Produk</a>
         </li>
         <li>
-            <a class="nav-link" href="{{ route('admin.profile_sekolah.index') }}"><i class="bi bi-building"></i> Profile Sekolah</a>
+            <a class="nav-link" href="{{ route('admin.profile_sekolah.index') }}"><i class="bi bi-building"></i> Profile</a>
         </li>
         <hr class="my-4" style="border-top: 3px solid rgb(255, 255, 255);">
         <li>
@@ -143,6 +143,6 @@
     </ul>
 
     <div class="sidebar-footer">
-        MTsN 7 Tasikmalaya @1996
+        FJB Siswa Berkah @1996
     </div>
 </div>

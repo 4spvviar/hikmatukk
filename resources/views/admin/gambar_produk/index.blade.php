@@ -3,15 +3,15 @@
 
 <div class="container mt-4">
     <div class="d-flex justify-content-between align-items-center mb-3 px-2">
-        <h5 class="fw-bold text-dark">Daftar Guru</h5>
-        <a href="{{ route('admin.guru.create') }}"
+        <h5 class="fw-bold text-dark">Gambar Produk</h5>
+        <a href="{{ route('admin.gambar_produk.create') }}"
            class="btn btn-primary rounded-3 fw-bold"
            style="background:#0d47a1;">
-            Tambah
+            <i class=""></i> Tambah
         </a>
     </div>
 
-     @if(session('success'))
+    @if(session('success'))
         <div class="alert alert-success alert-dismissible fade show" role="alert">
             {{ session('success') }}
             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
@@ -25,43 +25,42 @@
         </div>
     @endif
 
-<div class="card shadow-sm border-0">
-    <div class="table-responsive">
-        <table class="table table-hover mb-0 align-middle">
-            <thead class="table-light">
-                <tr class="text-center">
-                        <th width="5%">ID</th>
-                        <th>NIP</th>
-                        <th>Nama Guru</th>
-                        <th>Mapel</th>
-                        <th>Foto</th>
+    <div class="card shadow-sm border-0">
+        <div class="table-responsive">
+            <table class="table table-hover mb-0 align-middle">
+                <thead class="table-light">
+                    <tr class="text-center">
+                        <th width="5%">id_gambar</th>
+                        <th>id_produk</th>
+                        <th width="10%">Nama Gambar</th>
                         <th width="20%">Aksi</th>
                     </tr>
                 </thead>
                 <tbody>
-                    @forelse ($gurus as $guru)
-                        <tr class="text-center">
-                            <td>{{ $guru->id_guru }}</td>
-                                <td>{{ $guru->nip }}</td>
-                                <td>{{ $guru->nama_guru }}</td>
-                                <td>{{ $guru->mapel }}</td>
-                           <td>
-                                    @if($guru->foto)
-                                        <img src="{{ asset('storage/' . $guru->foto) }}" alt="Foto" width="50" height="50" class="rounded-circle">
-                                    @else
-                                        <span class="badge bg-secondary">Tidak ada</span>
-                                    @endif
+                    @forelse($gambar_produks as $gambar_produk)
+                        <tr class="text-center align-middle">
+                            <td>{{ $gambar_produk->id_gambar }}</td>
+                            <td class="">{{ $gambar_produk->id_produk }}</td>
+                            <td class="">{{ $gambar_produk->nama_gambar }}</td>
+                            <td class="">
+                                @if($gambar_produk->gambar)
+                                    <img src="{{ asset('storage/' . $gambar_produk->gambar) }}" alt="Gambar" width="120" height="20" class="img-thumbnail">
+                                @else
+                                    <span class="badge bg-secondary">Tidak ada</span>
+                                @endif
                             </td>
+                            <td class="">{{ $gambar_produk->user->name }}</td>
                             <td>
                                 <div class="d-flex justify-content-center gap-2">
-                                    <a href="{{ route('admin.guru.edit', Crypt::encrypt($guru->id_guru)) }}"
+                                    <a href="{{ route('admin.gambar_produk.edit', Crypt::encrypt($gambar_produk->id_gambar)) }}"
                                        class="btn btn-sm btn-warning fw-bold"
                                        data-bs-toggle="tooltip" title="Edit">
-                                        <span class="fw-bold">Edit</span>
+                                        <i class=""></i> Edit
                                     </a>
-                                    <form action="{{ route('admin.guru.destroy', Crypt::encrypt($guru->id_guru)) }}"
+                                    <form action="{{ route('admin.gambar_produk.destroy', Crypt::encrypt($gambar_produk->id_gambar)) }}"
                                           method="POST"
-                                          onsubmit="return confirm('Yakin ingin menghapus?')">
+                                          onsubmit="return confirm('Yakin ingin menghapus?')"
+                                          class="d-inline">
                                         @csrf
                                         @method('DELETE')
                                         <button type="submit"
@@ -74,10 +73,8 @@
                             </td>
                         </tr>
                     @empty
-                        <tr>
-                            <td colspan="6" class="text-center text-muted py-3">
-                                <i class="fa-solid fa-circle-info"></i> Belum Ada Data Siswa
-                            </td>
+                        <tr class="text-center">
+                            <td colspan="7">Tidak ada data gambar produk.</td>
                         </tr>
                     @endforelse
                 </tbody>
@@ -87,4 +84,3 @@
 </div>
 
 @endsection
-

@@ -6,9 +6,13 @@ use App\Models\Guru;
 use App\Models\User;
 use App\Models\Siswa;
 use App\Models\Ekstrakulikuler;
-use App\Models\Galeri;
 use App\Models\profile_sekolah;
+use App\Models\Galeri;
 use App\Models\Berita;
+use App\Models\GambarProduk;
+use App\Models\Kategori;
+use App\Models\Produk;
+use App\Models\Toko;
 use Illuminate\Contracts\Encryption\DecryptException;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -19,21 +23,21 @@ class AdminController extends Controller
     //
     public function dashboard(){
         $countUser = User::count();
-        $countSiswa = Siswa::count();
-        $countGuru = Guru::count();
-        $countEkstrakulikuler = Ekstrakulikuler::count();
-        $countGaleri = Galeri::count();
+        $countKategori = Kategori::count();
+        $countToko = Toko::count();
+        $countProduk = Produk::count();
         $countProfileSekolah = profile_sekolah::count();
-        $countBerita = Berita::count();
+        $countGaleri = Galeri::count();
+        $countGambarProduk = GambarProduk::count();
 
         return view('admin.dashboard', compact(
             'countUser',
-            'countSiswa',
-            'countGuru',
-            'countEkstrakulikuler',
-            'countGaleri',
+            'countKategori',
+            'countToko',
+            'countProduk',
             'countProfileSekolah',
-            'countBerita'
+            'countGaleri',
+            'countGambarProduk'
         ));
     }
 
@@ -126,33 +130,31 @@ class AdminController extends Controller
         return redirect()->route('admin.user.index')->with('success', 'User berhasil dihapus');
     }
 
-    //----siswa----
-    public function siswaIndex()
+    //----kategori----
+    public function kategoriIndex()
     {
-        $siswas = Siswa::all();
-        return view('admin.siswa.index', compact('siswas'));
+        $kategori = Kategori::all();
+        return view('admin.kategori.index', compact('kategori'));
     }
 
-    public function siswaCreate()
+    public function kategoriCreate()
     {
-        return view('admin.siswa.create');
+        return view('admin.kategori.create');
     }
 
-    public function siswaStore(Request $request)
+    public function kategoriStore(Request $request)
     {
         $validated = $request->validate([
-            'nisn' => 'required|string|max:10|unique:siswas,nisn',
-            'nama_siswa' => 'required|string|max:40',
-            'jenis_kelamin' => 'required|in:Laki-laki,Perempuan',
-            'tahun_masuk' => 'required|integer|min:1900|max:' . (date('Y') + 1),
+            'id_kategori' => 'required|string|max:10|unique:kategoris,id_kategori',
+            'nama_kategori' => 'required|string|max:40',
         ]);
 
-        Siswa::create($validated);
+        Kategori::create($validated);
 
-        return redirect()->route('admin.siswa.index')->with('success', 'Siswa berhasil ditambahkan.');
+        return redirect()->route('admin.kategori.index')->with('success', 'Kategori berhasil ditambahkan.');
     }
 
-    public function siswaEdit(string $id)
+    public function kategoriEdit(string $id)
     {
         try {
             $id = Crypt::decrypt($id);
@@ -160,11 +162,11 @@ class AdminController extends Controller
             return redirect()->back()->with('danger', 'ID tidak valid.');
         }
 
-        $siswa = Siswa::findOrFail($id);
-        return view('admin.siswa.edit', compact('siswa'));
+        $kategori = Kategori::findOrFail($id);
+        return view('admin.kategori.edit', compact('kategori'));
     }
 
-    public function siswaUpdate(Request $request, string $id)
+    public function kategoriUpdate(Request $request, string $id)
     {
         try {
             $id = Crypt::decrypt($id);
@@ -172,21 +174,19 @@ class AdminController extends Controller
             return redirect()->back()->with('danger', 'ID tidak valid.');
         }
 
-        $siswa = Siswa::findOrFail($id);
+        $kategori = Kategori::findOrFail($id);
 
         $validated = $request->validate([
-            'nisn' => 'required|string|max:10|unique:siswas,nisn,' . $siswa->getKey() . ',id_siswa',
-            'nama_siswa' => 'required|string|max:40',
-            'jenis_kelamin' => 'required|in:Laki-laki,Perempuan',
-            'tahun_masuk' => 'required|integer|min:1900|max:' . (date('Y') + 1),
+            'id_kategori' => 'required|string|max:10|unique:kategoris,id_kategori,' . $kategori->getKey() . ',id_kategori',
+            'nama_kategori' => 'required|string|max:40',
         ]);
 
-        $siswa->update($validated);
+        $kategori->update($validated);
 
-        return redirect()->route('admin.siswa.index')->with('success', 'Siswa berhasil diupdate.');
+        return redirect()->route('admin.kategori.index')->with('success', 'Kategori berhasil diupdate.');
     }
 
-    public function siswaDestroy(string $id)
+    public function kategoriDestroy(string $id)
     {
         try {
             $id = Crypt::decrypt($id);
@@ -194,129 +194,47 @@ class AdminController extends Controller
             return redirect()->back()->with('danger', 'ID tidak valid.');
         }
 
-        $siswa = Siswa::findOrFail($id);
-        $siswa->delete();
+        $kategori = Kategori::findOrFail($id);
+        $kategori->delete();
 
-        return redirect()->route('admin.siswa.index')->with('success', 'Siswa berhasil dihapus.');
+        return redirect()->route('admin.kategori.index')->with('success', 'Kategori berhasil dihapus.');
     }
 
-    //----guru-----
-    public function guruIndex()
+    //----toko-----
+    public function tokoIndex()
     {
-        $gurus = Guru::all();
-        return view('admin.guru.index', compact('gurus'));
+        $tokos = Toko::all();
+        return view('admin.toko.index', compact('tokos'));
     }
 
-    public function guruCreate()
+    public function tokoCreate()
     {
-        return view('admin.guru.create');
+        return view('admin.toko.create');
     }
 
-    public function guruStore(Request $request)
+    public function tokoStore(Request $request)
     {
         $validated = $request->validate([
-            'nama_guru' => 'required|string|max:40',
-            'nip' => 'required|string|max:15|unique:gurus,nip',
-            'mapel' => 'required|string|max:40',
-            'foto' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
-        ]);
-
-        if ($request->hasFile('foto')) {
-            $fotoPath = $request->file('foto')->store('guru_foto', 'public');
-            $validated['foto'] = $fotoPath;
-        }
-
-        Guru::create($validated);
-
-        return redirect()->route('admin.guru.index')->with('success', 'Guru berhasil ditambahkan.');
-    }
-
-    public function guruEdit(string $id)
-    {
-        try {
-            $id = Crypt::decrypt($id);
-        } catch (DecryptException $e) {
-            return redirect()->back()->with('danger', 'ID tidak valid.');
-        }
-
-        $guru = Guru::findOrFail($id);
-        return view('admin.guru.edit', compact('guru'));
-    }
-
-    public function guruUpdate(Request $request, string $id)
-    {
-        try {
-            $id = Crypt::decrypt($id);
-        } catch (DecryptException $e) {
-            return redirect()->back()->with('danger', 'ID tidak valid.');
-        }
-
-        $guru = Guru::findOrFail($id);
-
-        $validated = $request->validate([
-            'nama_guru' => 'required|string|max:40',
-            'nip' => 'required|string|max:15|unique:gurus,nip,' . $guru->getKey() . ',id_guru',
-            'mapel' => 'required|string|max:40',
-            'foto' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
-        ]);
-
-        if ($request->hasFile('foto')) {
-            $fotoPath = $request->file('foto')->store('guru_foto', 'public');
-            $validated['foto'] = $fotoPath;
-        }
-
-        $guru->update($validated);
-
-        return redirect()->route('admin.guru.index')->with('success', 'Guru berhasil diupdate.');
-    }
-
-    public function guruDestroy(string $id)
-    {
-        try {
-            $id = Crypt::decrypt($id);
-        } catch (DecryptException $e) {
-            return redirect()->back()->with('danger', 'ID tidak valid.');
-        }
-
-        $guru = Guru::findOrFail($id);
-        $guru->delete();
-
-        return redirect()->route('admin.guru.index')->with('success', 'Guru berhasil dihapus.');
-    }
-
-    //-----ekstrakulikuler-----
-    public function ekstrakulikulerIndex()
-    {
-        $ekstrakulikulers = Ekstrakulikuler::all();
-        return view('admin.ekstrakulikuler.index', compact('ekstrakulikulers'));
-    }
-
-    public function ekstrakulikulerCreate()
-    {
-        return view('admin.ekstrakulikuler.create');
-    }
-
-    public function ekstrakulikulerStore(Request $request)
-    {
-        $validated = $request->validate([
-            'nama_ekskul' => 'required|string|max:40',
-            'pembina' => 'required|string|max:40',
-            'jadwal_latihan' => 'required|string|max:100',
-            'deskripsi' => 'nullable|string',
+            'id_toko' => 'required|string|max:10|unique:toko,id_toko',
+            'nama_toko' => 'required|string|max:40',
+            'deskripsi' => 'required|string|max:15|unique:toko,deskripsi',
             'gambar' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'id_user' => 'required|exists:users,id_user',
+            'kontak_toko' => 'required|string|max:13',
+            'alamat' => 'required|string',
         ]);
 
         if ($request->hasFile('gambar')) {
-            $gambarPath = $request->file('gambar')->store('ekstrakulikuler_gambar', 'public');
+            $gambarPath = $request->file('gambar')->store('toko_gambar', 'public');
             $validated['gambar'] = $gambarPath;
         }
 
-        Ekstrakulikuler::create($validated);
+        Toko::create($validated);
 
-        return redirect()->route('admin.ekstrakulikuler.index')->with('success', 'Ekstrakulikuler berhasil ditambahkan.');
+        return redirect()->route('admin.toko.index')->with('success', 'Toko berhasil ditambahkan.');
     }
 
-    public function ekstrakulikulerEdit(string $id)
+    public function tokoEdit(string $id)
     {
         try {
             $id = Crypt::decrypt($id);
@@ -324,11 +242,11 @@ class AdminController extends Controller
             return redirect()->back()->with('danger', 'ID tidak valid.');
         }
 
-        $ekstrakulikuler = Ekstrakulikuler::findOrFail($id);
-        return view('admin.ekstrakulikuler.edit', compact('ekstrakulikuler'));
+        $toko = Toko::findOrFail($id);
+        return view('admin.toko.edit', compact('toko'));
     }
 
-    public function ekstrakulikulerUpdate(Request $request, string $id)
+    public function tokoUpdate(Request $request, string $id)
     {
         try {
             $id = Crypt::decrypt($id);
@@ -336,27 +254,29 @@ class AdminController extends Controller
             return redirect()->back()->with('danger', 'ID tidak valid.');
         }
 
-        $ekstrakulikuler = Ekstrakulikuler::findOrFail($id);
+        $toko = Toko::findOrFail($id);
 
         $validated = $request->validate([
-            'nama_ekskul' => 'required|string|max:40',
-            'pembina' => 'required|string|max:40',
-            'jadwal_latihan' => 'required|string|max:100',
-            'deskripsi' => 'nullable|string',
+            'id_toko' => 'required|string|max:10|unique:toko,id_toko,' . $toko->getKey() . ',id_toko',
+            'nama_toko' => 'required|string|max:40',
+            'deskripsi' => 'required|string|max:15|unique:toko,deskripsi,' . $toko->getKey() . ',id_toko',
             'gambar' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'id_user' => 'required|exists:users,id_user',
+            'kontak_toko' => 'required|string|max:13',
+            'alamat' => 'required|string',
         ]);
 
         if ($request->hasFile('gambar')) {
-            $gambarPath = $request->file('gambar')->store('ekstrakulikuler_gambar', 'public');
+            $gambarPath = $request->file('gambar')->store('toko_gambar', 'public');
             $validated['gambar'] = $gambarPath;
         }
 
-        $ekstrakulikuler->update($validated);
+        $toko->update($validated);
 
-        return redirect()->route('admin.ekstrakulikuler.index')->with('success', 'Ekstrakulikuler berhasil diupdate.');
+        return redirect()->route('admin.toko.index')->with('success', 'Toko berhasil diupdate.');
     }
 
-    public function ekstrakulikulerDestroy(string $id)
+    public function tokoDestroy(string $id)
     {
         try {
             $id = Crypt::decrypt($id);
@@ -364,10 +284,100 @@ class AdminController extends Controller
             return redirect()->back()->with('danger', 'ID tidak valid.');
         }
 
-        $ekstrakulikuler = Ekstrakulikuler::findOrFail($id);
-        $ekstrakulikuler->delete();
+        $toko = Toko::findOrFail($id);
+        $toko->delete();
 
-        return redirect()->route('admin.ekstrakulikuler.index')->with('success', 'Ekstrakulikuler berhasil dihapus.');
+        return redirect()->route('admin.toko.index')->with('success', 'Toko berhasil dihapus.');
+    }
+
+    //-----produk-----
+    public function produkIndex()
+    {
+        $produk = Produk::all();
+        return view('admin.produk.index', compact('produk'));
+    }
+
+    public function produkCreate()
+    {
+        return view('admin.produk.create');
+    }
+
+    public function produkStore(Request $request)
+    {
+        $validated = $request->validate([
+            'id_toko' => 'required|exists:toko,id_toko',
+            'nama_toko' => 'required|string|max:40',
+            'deskripsi' => 'required|string|max:15|unique:toko,deskripsi',
+            'gambar' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'id_user' => 'required|exists:users,id_user',
+            'kontak_toko' => 'required|string|max:13',
+            'alamat' => 'required|string',
+        ]);
+
+        if ($request->hasFile('gambar')) {
+            $gambarPath = $request->file('gambar')->store('produk_gambar', 'public');
+            $validated['gambar'] = $gambarPath;
+        }
+
+        Produk::create($validated);
+
+        return redirect()->route('admin.produk.index')->with('success', 'Produk berhasil ditambahkan.');
+    }
+
+    public function produkEdit(string $id)
+    {
+        try {
+            $id = Crypt::decrypt($id);
+        } catch (DecryptException $e) {
+            return redirect()->back()->with('danger', 'ID tidak valid.');
+        }
+
+        $produk = Produk::findOrFail($id);
+        return view('admin.produk.edit', compact('produk'));
+    }
+
+    public function produkUpdate(Request $request, string $id)
+    {
+        try {
+            $id = Crypt::decrypt($id);
+        } catch (DecryptException $e) {
+            return redirect()->back()->with('danger', 'ID tidak valid.');
+        }
+
+        $produk = Produk::findOrFail($id);
+
+        $validated = $request->validate([
+            'id_toko' => 'required|exists:toko,id_toko',
+            'nama_toko' => 'required|string|max:40',
+            'deskripsi' => 'required|string|max:15|unique:toko,deskripsi,' . $produk->getKey() . ',id_toko',
+            'gambar' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'id_user' => 'required|exists:users,id_user',
+            'kontak_toko' => 'required|string|max:13',
+            'alamat' => 'required|string',
+        ]);
+
+        if ($request->hasFile('gambar')) {
+            $gambarPath = $request->file('gambar')->store('produk_gambar', 'public');
+            $validated['gambar'] = $gambarPath;
+        }
+
+        $produk->update($validated);
+
+        return redirect()->route('admin.produk.index')->with('success', 'Produk berhasil diupdate.');
+    }
+
+    public function produkDestroy(string $id)
+    {
+        try {
+            $id = Crypt::decrypt($id);
+        } catch (DecryptException $e) {
+            return redirect()->back()->with('danger', 'ID tidak valid.');
+        }
+
+        $produk = Produk::findOrFail($id);
+        $produk->delete();
+
+        return redirect()->route('admin.produk.index')->with('success', 'Produk berhasil dihapus.');
     }
 
     //----galeri----
@@ -562,25 +572,24 @@ class AdminController extends Controller
         return redirect()->route('admin.profile_sekolah.index')->with('success', 'Profile Sekolah berhasil dihapus.');
     }
 
-    //----berita----
-    public function beritaIndex()
+    //----gambarproduk----
+    public function gambarProdukIndex()
     {
-        $beritas = Berita::with('user')->get();
-        return view('admin.berita.index', compact('beritas'));
+        $gambarProduks = GambarProduk::with('user')->get();
+        return view('admin.gambarproduk.index', compact('gambarProduks'));
     }
 
-    public function beritaCreate()
+    public function gambarProdukCreate()
     {
-        return view('admin.berita.create');
+        return view('admin.gambarproduk.create');
     }
 
-    public function beritaStore(Request $request)
+    public function gambarProdukStore(Request $request)
     {
         $validated = $request->validate([
-            'judul' => 'required|string|max:50',
-            'isi' => 'required|string',
-            'tanggal' => 'required|date',
-            'gambar' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'id_gambar' => 'required|string|max:10|unique:gambar_produks,id_gambar',
+            'id_produk' => 'required|exists:produks,id_produk',
+            'nama_gambar' => 'required|string|max:100',
         ]);
 
         $data = $request->only(['judul', 'isi', 'tanggal']);
@@ -597,11 +606,11 @@ class AdminController extends Controller
             $data['gambar'] = 'berita_gambar/' . $filename;
         }
 
-        Berita::create($data);
-        return redirect()->route('admin.berita.index')->with('success', 'Berita berhasil ditambahkan.');
+        GambarProduk::create($data);
+        return redirect()->route('admin.gambarproduk.index')->with('success', 'Gambar Produk berhasil ditambahkan.');
     }
 
-    public function beritaEdit(string $id)
+    public function gambarProdukEdit(string $id)
     {
         try {
             $id = Crypt::decrypt($id);
@@ -609,11 +618,11 @@ class AdminController extends Controller
             return redirect()->back()->with('danger', 'ID tidak valid.');
         }
 
-        $berita = Berita::findOrFail($id);
-        return view('admin.berita.edit', compact('berita'));
+        $gambarProduk = GambarProduk::findOrFail($id);
+        return view('admin.gambarproduk.edit', compact('gambarProduk'));
     }
 
-    public function beritaUpdate(Request $request, string $id)
+    public function gambarProdukUpdate(Request $request, string $id)
     {
         try {
             $id = Crypt::decrypt($id);
@@ -621,7 +630,7 @@ class AdminController extends Controller
             return redirect()->back()->with('danger', 'ID tidak valid.');
         }
 
-        $berita = Berita::findOrFail($id);
+        $gambarProduk = GambarProduk::findOrFail($id);
 
         $validated = $request->validate([
             'judul' => 'required|string|max:50',
@@ -634,8 +643,8 @@ class AdminController extends Controller
 
         if ($request->hasFile('gambar')) {
             // Delete old image
-            if ($berita->gambar && file_exists(storage_path('app/public/' . $berita->gambar))) {
-                unlink(storage_path('app/public/' . $berita->gambar));
+            if ($gambarProduk->gambar && file_exists(storage_path('app/public/' . $gambarProduk->gambar))) {
+                unlink(storage_path('app/public/' . $gambarProduk->gambar));
             }
             $file = $request->file('gambar');
             $filename = time() . '_' . $file->getClientOriginalName();
@@ -643,11 +652,11 @@ class AdminController extends Controller
             $data['gambar'] = 'berita_gambar/' . $filename;
         }
 
-        $berita->update($data);
-        return redirect()->route('admin.berita.index')->with('success', 'Berita berhasil diperbarui.');
+        $gambarProduk->update($data);
+        return redirect()->route('admin.gambarproduk.index')->with('success', 'Gambar Produk berhasil diperbarui.');
     }
 
-    public function beritaDestroy(string $id)
+    public function gambarProdukDestroy(string $id)
     {
         try {
             $id = Crypt::decrypt($id);
@@ -655,12 +664,12 @@ class AdminController extends Controller
             return redirect()->back()->with('danger', 'ID tidak valid.');
         }
 
-        $berita = Berita::findOrFail($id);
-        if ($berita->gambar && file_exists(storage_path('app/public/' . $berita->gambar))) {
-            unlink(storage_path('app/public/' . $berita->gambar));
+        $gambarProduk = GambarProduk::findOrFail($id);
+        if ($gambarProduk->gambar && file_exists(storage_path('app/public/' . $gambarProduk->gambar))) {
+            unlink(storage_path('app/public/' . $gambarProduk->gambar));
         }
-        $berita->delete();
-        return redirect()->route('admin.berita.index')->with('success', 'Berita berhasil dihapus.');
+        $gambarProduk->delete();
+        return redirect()->route('admin.gambarproduk.index')->with('success', 'Gambar Produk berhasil dihapus.');
     }
 
 }

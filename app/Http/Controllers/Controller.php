@@ -2,72 +2,42 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Routing\Controller as BaseController;
+use App\Models\User;
+use App\Models\Produk;
+use App\Models\Kategori;
+use App\Models\GambarProduk;
+use App\Models\Toko;
 use App\Models\profile_sekolah;
-use App\Models\Guru;
-use App\Models\Siswa;
-use App\Models\Berita;
-use App\Models\Ekstrakulikuler;
 use App\Models\Galeri;
 
-class Controller
+class Controller extends BaseController
 {
-    //
-    public function home(){
+    public function home()
+    {
         $profile = profile_sekolah::first();
-        $gurus = Guru::all();
-        $siswas = Siswa::all();
-        $beritas = Berita::with('user')->orderBy('tanggal', 'desc')->take(3)->get();
-        $ekstrakulikulers = Ekstrakulikuler::orderBy('nama_ekskul')->get();
         $galeris = Galeri::whereIn('kategori', ['foto', 'video'])->orderBy('tanggal', 'desc')->get();
-        return view('layouts.home', compact('profile', 'gurus', 'siswas', 'beritas', 'ekstrakulikulers', 'galeris'));
+        $admins = User::where('role', 'admin')->get();
+        $members = User::where('role', 'member')->get();
+        return view('layouts.home', compact('profile', 'galeris', 'admins', 'members'));
     }
 
-
-    public function guru(){
+    public function galeri()
+    {
         $profile = profile_sekolah::first();
-        $gurus = Guru::all();
-        $beritas = Berita::with('user')->orderBy('tanggal', 'desc')->take(3)->get();
         $galeris = Galeri::whereIn('kategori', ['foto', 'video'])->orderBy('tanggal', 'desc')->get();
-        return view('layouts.guru', compact('profile','gurus', 'beritas', 'galeris'));
+        return view('layouts.galeri', compact('profile', 'galeris'));
     }
 
-    public function beritaDetail($id){
-        $berita = Berita::with('user')->findOrFail($id);
+    public function tentang()
+    {
         $profile = profile_sekolah::first();
-        $beritas = Berita::with('user')->orderBy('tanggal', 'desc')->take(3)->get();
         $galeris = Galeri::whereIn('kategori', ['foto', 'video'])->orderBy('tanggal', 'desc')->get();
-        return view('berita.detail', compact('berita', 'profile', 'beritas', 'galeris'));
+        return view('profile.tentang', compact('profile', 'galeris'));
     }
 
-    public function galeri(){
-        $berita = Berita::with('user');
-        $profile = profile_sekolah::first();
-        $beritas = Berita::with('user')->orderBy('tanggal', 'desc')->take(3)->get();
-        $galeris = Galeri::whereIn('kategori', ['foto', 'video'])->orderBy('tanggal', 'desc')->get();
-        return view('layouts.galeri', compact('beritas', 'profile', 'galeris'));
-    }
-
-    public function ekskul(){
-        $berita = Berita::with('user');
-        $profile = profile_sekolah::first();
-        $beritas = Berita::with('user')->orderBy('tanggal', 'desc')->take(3)->get();
-        $galeris = Galeri::whereIn('kategori', ['foto', 'video'])->orderBy('tanggal', 'desc')->get();
-        $ekstrakulikulers = Ekstrakulikuler::orderBy('nama_ekskul')->get();
-
-        return view('layouts.ekstrakulikuler', compact('beritas', 'profile', 'galeris', 'ekstrakulikulers'));
-    }
-
-    public function tentang(){
-        $berita = Berita::with('user');
-        $profile = profile_sekolah::first();
-        $beritas = Berita::with('user')->orderBy('tanggal', 'desc')->take(3)->get();
-        $galeris = Galeri::whereIn('kategori', ['foto', 'video'])->orderBy('tanggal', 'desc')->get();
-        return view('profile.tentang', compact('beritas', 'profile', 'galeris'));
-    }
-
-    public function visimisi(){
+    public function visimisi()
+    {
         return view('profile.visimisi');
     }
-
-
 }

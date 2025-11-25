@@ -74,36 +74,36 @@
                         </a>
                     </li>
                     <li class="breadcrumb-item active text-muted" aria-current="page">
-                        Guru
+                        Toko
                     </li>
                 </ol>
             </nav>
         </div>
 
         <!-- Thumbnail -->
-        <div class="thumb">
+        {{-- <div class="thumb">
             <a href="#">
                 <img class="img" src="https://sman1yogya.sch.id/assets/images/uploads/page/guru.jpg" alt="Guru">
             </a>
-        </div>
+        </div> --}}
 
         <!-- Tabel Tenaga Pendidik -->
         <div class="table-responsive">
-            <h2 class="fw-bold mb-4">Tenaga Pendidik</h2>
+            <h2 class="fw-bold mb-4">Toko</h2>
             <table class="table">
                 <thead>
                     <tr>
                         <th scope="col" style="width: 5%;">No</th>
-                        <th scope="col" style="width: 25%;">Nama</th>
-                        <th scope="col" style="width: 30%;">Mata Pelajaran</th>
+                        <th scope="col" style="width: 25%;">Nama Toko</th>
+                        <th scope="col" style="width: 30%;">Deskripsi</th>
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach($gurus as $index => $guru)
+                    @foreach($tokos as $index => $toko)
                     <tr>
                         <th scope="row">{{ $index + 1 }}</th>
-                        <td>{{ $guru->nama_guru }}</td>
-                        <td>{{ $guru->mapel }}</td>
+                        <td>{{ $toko->nama_toko }}</td>
+                        <td>{{ $toko->deskripsi }}</td>
                     </tr>
                     @endforeach
                 </tbody>

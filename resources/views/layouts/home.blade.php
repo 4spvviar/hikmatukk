@@ -64,42 +64,41 @@
 </section>
 @endif
 
-<!-- Berita Terbaru -->
-@if(isset($beritas) && $beritas->count() > 0)
+<!-- Gambar Produk -->
+@if(isset($gambarProduks) && $gambarProduks->count() > 0)
 <section class="py-5" style="background:#002147;">
     <div class="container">
-        <h2 class="text-center mb-4 fw-bold text-white">Berita Terbaru</h2>
+        <h2 class="text-center mb-4 fw-bold text-white">Gambar Produk</h2>
         <div class="row justify-content-center">
-            @foreach($beritas as $berita)
+            @foreach($gambarProduks as $gambarProduk)
             <div class="col-md-6 col-lg-4 mb-4">
                 <div class="card h-100 shadow-sm overflow-hidden">
-                    @if($berita->gambar)
+                    @if($gambarProduk->gambar)
                     <div class="position-relative">
-                        <img src="{{ asset('storage/' . $berita->gambar) }}"
+                        <img src="{{ asset('storage/' . $gambarProduk->gambar) }}"
                              class="card-img-top"
-                             alt="{{ $berita->judul }}"
+                             alt="{{ $gambarProduk->judul }}"
                              style="height: 250px; object-fit: cover;">
                         <div class="position-absolute top-0 start-0 bg-dark bg-opacity-75 text-warning p-3"
                              style="width: 80px; height: 80px; border-radius: 0 0 1rem 0;">
                             <div class="fs-5 fw-bold">
-                                {{ \Carbon\Carbon::parse($berita->tanggal)->format('d') }}
+                                {{ \Carbon\Carbon::parse($gambarProduk->tanggal)->format('d') }}
                             </div>
                             <div class="small">
-                                {{ \Carbon\Carbon::parse($berita->tanggal)->format('M') }}
+                                {{ \Carbon\Carbon::parse($gambarProduk->tanggal)->format('M') }}
                             </div>
                         </div>
                     </div>
                     @endif
                     <div class="card-body d-flex flex-column">
-                        <h5 class="card-title fw-bold">{{ $berita->judul }}</h5>
+                        <h5 class="card-title fw-bold">{{ $gambarProduk->judul }}</h5>
                         <p class="card-text flex-grow-1" style="max-height:4.5rem;overflow:hidden;">
-                            {{ \Illuminate\Support\Str::limit(strip_tags($berita->isi), 100, '...') }}
+                            {{ \Illuminate\Support\Str::limit(strip_tags($gambarProduk->isi), 100, '...') }}
                         </p>
                         <hr class="my-4">
                         <small class="text-muted d-flex justify-content-between align-items-center w-100">
-                            <span><i class="fas fa-user"></i> {{ $berita->user ? $berita->user->name : 'admin' }}</span>
-                            <a href="{{ url('/berita/' . $berita->id_berita) }}" class="btnd">Detail</a>
-
+                            <span><i class="fas fa-user"></i> {{ $gambarProduk->user ? $gambarProduk->user->name : 'admin' }}</span>
+                            <a href="{{ url('/gambarProduk/' . $gambarProduk->id) }}" class="btnd">Detail</a>
                         </small>
                     </div>
                 </div>
@@ -141,25 +140,25 @@
 </section>
 @endif
 
-<!-- Ekstrakurikuler -->
-@if(isset($ekstrakulikulers) && $ekstrakulikulers->count() > 0)
+<!-- Produk -->
+@if(isset($produk) && $produk->count() > 0)
 <section class="py-5" style="background:#002147;">
     <div class="container">
-        <h2 class="text-center mb-4 fw-bold text-white">Ekstrakurikuler</h2>
+        <h2 class="text-center mb-4 fw-bold text-white">Produk</h2>
         <div class="row justify-content-center">
-            @foreach($ekstrakulikulers->take(3) as $ekstrakulikuler)
+            @foreach($produk->take(3) as $produk)
             <div class="col-md-6 col-lg-4 mb-4">
                 <div class="card h-100 shadow-sm overflow-hidden">
-                    @if($ekstrakulikuler->gambar)
-                        <img src="{{ asset('storage/' . $ekstrakulikuler->gambar) }}"
+                    @if($produk->gambar)
+                        <img src="{{ asset('storage/' . $produk->gambar) }}"
                              class="card-img-top"
-                             alt="{{ $ekstrakulikuler->nama_ekskul }}"
+                             alt="{{ $produk->nama_produk }}"
                              style="height:250px;object-fit:cover;">
                     @endif
                     <div class="card-body d-flex flex-column">
-                        <h5 class="card-title fw-bold">{{ $ekstrakulikuler->nama_ekskul }}</h5>
+                        <h5 class="card-title fw-bold">{{ $produk->nama_produk }}</h5>
                         <p class="card-text flex-grow-1" style="max-height:4.5rem;overflow:hidden;">
-                            {{ \Illuminate\Support\Str::limit(strip_tags($ekstrakulikuler->deskripsi), 100, '...') }}
+                            {{ \Illuminate\Support\Str::limit(strip_tags($produk->deskripsi), 100, '...') }}
                         </p>
                     </div>
                 </div>
@@ -170,23 +169,23 @@
 </section>
 @endif
 
-<!-- Guru -->
-@if(isset($gurus) && $gurus->count() > 0)
+<!-- Admins -->
+@if(isset($admins) && $admins->count() > 0)
 <section class="py-5 bg-light">
     <div class="container">
-        <h2 class="text-center mb-4 fw-bold text-black">Tenaga Pendidikan</h2>
-        <div id="guruCarousel" class="carousel slide" data-bs-ride="carousel">
+        <h2 class="text-center mb-4 fw-bold text-black">Admins</h2>
+        <div id="adminsCarousel" class="carousel slide" data-bs-ride="carousel">
             <div class="carousel-inner">
-                @foreach($gurus->chunk(4) as $chunk)
+                @foreach($admins->chunk(4) as $chunk)
                 <div class="carousel-item {{ $loop->first ? 'active' : '' }}">
                     <div class="row justify-content-center">
-                        @foreach($chunk as $guru)
+                        @foreach($chunk as $admin)
                         <div class="col-6 col-md-3 col-lg-2 mb-4">
                             <div class="card h-100 shadow-sm overflow-hidden">
-                                @if($guru->foto)
-                                    <img src="{{ asset('storage/' . $guru->foto) }}"
+                                @if($admin->foto)
+                                    <img src="{{ asset('storage/' . $admin->foto) }}"
                                          class="card-img-top"
-                                         alt="{{ $guru->nama_guru }}"
+                                         alt="{{ $admin->nama }}"
                                          style="height:250px;object-fit:cover;">
                                 @else
                                     <img src="{{ asset('assets/foto/guru.jpg') }}"
@@ -195,8 +194,8 @@
                                          style="height:250px;object-fit:cover;">
                                 @endif
                                 <div class="card-body text-center">
-                                    <h5 class="card-title fw-bold">{{ $guru->nama_guru }}</h5>
-                                    <p class="card-text">{{ $guru->mapel }}</p>
+                                    <h5 class="card-title fw-bold">{{ $admin->nama }}</h5>
+                                    <p class="card-text">{{ $admin->role }}</p>
                                 </div>
                             </div>
                         </div>
@@ -205,11 +204,11 @@
                 </div>
                 @endforeach
             </div>
-            <button class="carousel-control-prev" type="button" data-bs-target="#guruCarousel" data-bs-slide="prev">
+            <button class="carousel-control-prev" type="button" data-bs-target="#adminsCarousel" data-bs-slide="prev">
                 <span class="carousel-control-prev-icon" aria-hidden="true"></span>
                 <span class="visually-hidden">Previous</span>
             </button>
-            <button class="carousel-control-next" type="button" data-bs-target="#guruCarousel" data-bs-slide="next">
+            <button class="carousel-control-next" type="button" data-bs-target="#adminsCarousel" data-bs-slide="next">
                 <span class="carousel-control-next-icon" aria-hidden="true"></span>
                 <span class="visually-hidden">Next</span>
             </button>
@@ -218,23 +217,23 @@
 </section>
 @endif
 
-<!-- Data Guru & Siswa -->
-<section class="py-5" style="background:#004715;">
+<!-- Data Admin & Members -->
+<section class="py-5" style="background:#1196ad;">
     <div class="container">
-        <h2 class="text-center mb-4 fw-bold text-white">Data Guru Dan Siswa</h2>
+        <h2 class="text-center mb-4 fw-bold text-white">Data Produk</h2>
         <div class="row justify-content-center g-4">
             <div class="col-md-6 col-lg-4">
                 <div class="card shadow-sm text-center p-4">
-                    <i class="fas fa-chalkboard-teacher fa-3x mb-3 text-primary"></i>
-                    <h3 class="fw-bold">{{ $gurus->count() }}</h3>
-                    <p class="mb-0">Total Guru</p>
+                    <i class="fas fa-box-open fa-3x mb-3 text-primary"></i>
+                    <h3 class="fw-bold">{{ $admins->count() }}</h3>
+                    <p class="mb-0">Total Produk</p>
                 </div>
             </div>
             <div class="col-md-6 col-lg-4">
                 <div class="card shadow-sm text-center p-4">
-                    <i class="fas fa-user-graduate fa-3x mb-3 text-success"></i>
-                    <h3 class="fw-bold">{{ $siswas->count() }}</h3>
-                    <p class="mb-0">Total Siswa</p>
+                    <i class="fas fa-box-open fa-3x mb-3 text-success"></i>
+                    <h3 class="fw-bold">{{ $members->count() }}</h3>
+                    <p class="mb-0">Total Produk Tersedia</p>
                 </div>
             </div>
         </div>
@@ -305,7 +304,7 @@
 }
 .banner-area {
     position: relative;
-    background-image: url('/assets/foto/mts7.jpeg');
+    background-image: url('/assets/foto/market.jpg');
     background-size: cover;
     background-position: center;
     background-attachment: fixed;

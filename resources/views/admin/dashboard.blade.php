@@ -20,9 +20,9 @@
             <div class="card text-white border-0 shadow-lg stat-card" style="background: linear-gradient(135deg,#1cc88a,#0f9d58);">
                 <div class="card-body position-relative overflow-hidden">
                     <i class="bi bi-person fa-3x position-absolute opacity-25 top-50 end-0 translate-middle-y me-3"></i>
-                    <p class="mb-1 fw-bold">Siswa</p>
-                    <h3 class="mb-0">{{ $countSiswa }}</h3>
-                    <small class="text-light">Total Siswa</small>
+                    <p class="mb-1 fw-bold">Kategori</p>
+                    <h3 class="mb-0">{{ $countKategori }}</h3>
+                    <small class="text-light">Total Kategori</small>
                 </div>
             </div>
         </div>
@@ -31,9 +31,9 @@
             <div class="card text-white border-0 shadow-lg stat-card" style="background: linear-gradient(135deg,#f6c23e,#d39e00);">
                 <div class="card-body position-relative overflow-hidden">
                     <i class="bi bi-person-badge fa-3x position-absolute opacity-25 top-50 end-0 translate-middle-y me-3"></i>
-                    <p class="mb-1 fw-bold">Guru</p>
-                    <h3 class="mb-0">{{ $countGuru }}</h3>
-                    <small class="text-light">Total Guru</small>
+                    <p class="mb-1 fw-bold">Toko</p>
+                    <h3 class="mb-0">{{ $countToko }}</h3>
+                    <small class="text-light">Total Toko</small>
                 </div>
             </div>
         </div>
@@ -42,9 +42,9 @@
             <div class="card text-white border-0 shadow-lg stat-card" style="background: linear-gradient(135deg,#36b9cc,#117a8b);">
                 <div class="card-body position-relative overflow-hidden">
                     <i class="bi bi-trophy fa-3x position-absolute opacity-25 top-50 end-0 translate-middle-y me-3"></i>
-                    <p class="mb-1 fw-bold">Ekstrakurikuler</p>
-                    <h3 class="mb-0">{{ $countEkstrakulikuler }}</h3>
-                    <small class="text-light">Total Ekstrakurikuler</small>
+                    <p class="mb-1 fw-bold">Produk</p>
+                    <h3 class="mb-0">{{ $countProduk }}</h3>
+                    <small class="text-light">Total Produk</small>
                 </div>
             </div>
         </div>
@@ -77,9 +77,9 @@
             <div class="card text-white border-0 shadow-lg stat-card" style="background: linear-gradient(135deg,#fd7e14,#e8680f);">
                 <div class="card-body position-relative overflow-hidden">
                     <i class="bi bi-newspaper fa-3x position-absolute opacity-25 top-50 end-0 translate-middle-y me-3"></i>
-                    <p class="mb-1 fw-bold">Berita</p>
-                    <h3 class="mb-0">{{ $countBerita }}</h3>
-                    <small class="text-light">Total Berita</small>
+                    <p class="mb-1 fw-bold">Gambar Produk</p>
+                    <h3 class="mb-0">{{ $countGambarProduk }}</h3>
+                    <small class="text-light">Total Gambar Produk</small>
                 </div>
             </div>
         </div>

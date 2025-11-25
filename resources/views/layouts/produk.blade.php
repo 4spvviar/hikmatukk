@@ -1,8 +1,8 @@
 @extends('layouts.index')
 @section('content')
 
-<!-- Section Ekstrakurikuler -->
-<section id="ekstrakurikuler" class="ekskul">
+<!-- Section Produk -->
+<section id="produk" class="produk">
   <div class="container">
     <!-- Breadcrumb -->
     <div class="row justify-content-center">
@@ -15,21 +15,21 @@
                         </a>
                     </li>
                     <li class="breadcrumb-item active text-muted" aria-current="page">
-                        Ekstrakurikuler
+                        Produk
                     </li>
                 </ol>
             </nav>
         </div>
     </div>
     <div class="row g-3">
-      @foreach($ekstrakulikulers as $ekskul)
-      @if($ekskul->gambar)
+      @foreach($produks as $produk)
+      @if($produk->gambar)
       <!-- Item Galeri -->
       <div class="col-lg-3 col-md-4 col-sm-6">
         <div class="gallery-item">
-          <img src="{{ asset('storage/' . $ekskul->gambar) }}" alt="{{ $ekskul->nama_ekskul }}" class="img-fluid" data-description="{{ $ekskul->deskripsi ?? '' }}">
+          <img src="{{ asset('storage/' . $produk->gambar) }}" alt="{{ $produk->nama_produk }}" class="img-fluid" data-description="{{ $produk->deskripsi ?? '' }}">
           <div class="overlay">
-            <p>{{ $ekskul->nama_ekskul }}</p>
+            <p>{{ $produk->nama_produk }}</p>
           </div>
         </div>
       </div>
@@ -39,8 +39,8 @@
   </div>
 </section>
 
-<!-- Modal Detail Ekstrakulikuler -->
-<div id="ekskulModal" class="modal">
+<!-- Modal Detail Produk -->
+<div id="produkModal" class="modal">
   <span class="close" id="modalClose">&times;</span>
   <img class="modal-content" id="modalImage">
   <div id="caption"></div>

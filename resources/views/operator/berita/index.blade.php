@@ -3,7 +3,7 @@
 
 <div class="container mt-4">
     <div class="d-flex justify-content-between align-items-center mb-3 px-2">
-        <h5 class="fw-bold text-dark">Data Berita</h5>
+        <h5 class="fw-bold text-dark">Gambar Produk</h5>
         <a href="{{ route('operator.berita.create') }}"
            class="btn btn-primary rounded-3 fw-bold"
            style="background:#0d47a1;">
@@ -30,12 +30,9 @@
             <table class="table table-hover mb-0 align-middle">
                 <thead class="table-light">
                     <tr class="text-center">
-                        <th width="5%">ID</th>
-                        <th>Judul</th>
-                        <th>Isi</th>
-                        <th>Tanggal</th>
-                        <th>Gambar</th>
-                        <th>Penulis</th>
+                        <th width="5%">id_gambar</th>
+                        <th>id_produk</th>
+                        <th width="10%">nama_gambar</th>
                         <th width="20%">Aksi</th>
                     </tr>
                 </thead>

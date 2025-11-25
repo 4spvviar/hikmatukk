@@ -14,7 +14,7 @@
     }
     /* Header biru */
     .sidebar-header{
-      background:#0da150;
+      background:#1196ad;
       color:#fff;
       padding:1.5rem 1rem;
       display:flex;
@@ -89,7 +89,7 @@
 <div class="sidebar">
     <!-- header -->
     <div class="sidebar-header">
-        <img src="{{ asset('assets/foto/mts tercinta.png') }}" alt="Logo" height="50" class="rounded-circle">
+        <img src="{{ asset('assets/foto/shop (2).png') }}" alt="Logo" height="50" class="rounded-circle">
         <span>OperatorCon</span>
     </div>
 
@@ -126,6 +126,6 @@
     </ul>
 
     <div class="sidebar-footer">
-        MTsN 7 Tasikmalaya @1996
+        FJB Siswa Berkah @1996
     </div>
 </div>

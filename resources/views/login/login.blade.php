@@ -3,14 +3,14 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Login Admin Sekolah</title>
+    <title>Login Admin</title>
     <link rel="stylesheet" href="{{ asset('assets/bootstrap/css/bootstrap.min.css') }}" />
     <link rel="stylesheet" href="{{ asset('assets/fontawesome/css/all.min.css') }}" />
     <style>
         body {
             margin: 0;
             height: 100vh;
-            background: linear-gradient(135deg, #0d47a1 0%, #25fc66 100%);
+            background: linear-gradient(135deg, #0d47a1 0%, #1196ad 100%);
             background-repeat: no-repeat;
             background-attachment: fixed;
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -102,8 +102,8 @@
 </head>
 <body>
     <div class="login-container">
-        <img src="{{ asset('assets/foto/mts tercinta.png') }}" alt="Login Image" />
-        <h2>Login</h2>
+        <img src="{{ asset('assets/foto/keranjang (2).png') }}" alt="Login Image" />
+        <h2>Login Marketplace</h2>
         <form action="{{ route('auth') }}" method="POST">
             @csrf
             <div class="mb-3 input-icon">

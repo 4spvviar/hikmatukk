@@ -6,46 +6,45 @@
         <div class="col-md-8">
             <div class="card shadow-sm border-0">
                 <div class="card-header bg-primary text-white">
-                    <h5 class="mb-0">Tambah Berita</h5>
+                    <h5 class="mb-0">Edit Toko</h5>
                 </div>
                 <div class="card-body">
-                    <form action="{{ route('admin.berita.store') }}" method="POST" enctype="multipart/form-data">
+                    <form action="{{ route('admin.toko.update', Crypt::encrypt($toko->id_toko)) }}" method="POST" enctype="multipart/form-data">
                         @csrf
-
+                        @method('PUT')
                         <div class="mb-3">
-                            <label for="judul" class="form-label">Judul</label>
-                            <input type="text" class="form-control @error('judul') is-invalid @enderror" id="judul" name="judul" value="{{ old('judul') }}" required>
-                            @error('judul')
+                            <label for="nama_toko" class="form-label">Nama Toko</label>
+                            <input type="text" class="form-control @error('nama_toko') is-invalid @enderror" id="nama_toko" name="nama_toko" value="{{ old('nama_toko', $toko->nama_toko) }}" required>
+                            @error('nama_toko')
                                 <div class="invalid-feedback">{{ $message }}</div>
                             @enderror
                         </div>
-
                         <div class="mb-3">
-                            <label for="isi" class="form-label">Isi</label>
-                            <textarea class="form-control @error('isi') is-invalid @enderror" id="isi" name="isi" rows="5" required>{{ old('isi') }}</textarea>
-                            @error('isi')
+                            <label for="deskripsi" class="form-label">Deskripsi</label>
+                            <input type="text" class="form-control @error('deskripsi') is-invalid @enderror" id="deskripsi" name="deskripsi" value="{{ old('deskripsi', $toko->deskripsi) }}" required>
+                            @error('deskripsi')
                                 <div class="invalid-feedback">{{ $message }}</div>
                             @enderror
                         </div>
-
                         <div class="mb-3">
-                            <label for="tanggal" class="form-label">Tanggal</label>
-                            <input type="date" class="form-control @error('tanggal') is-invalid @enderror" id="tanggal" name="tanggal" value="{{ old('tanggal') }}" required>
-                            @error('tanggal')
+                            <label for="kontak_toko" class="form-label">Kontak Toko</label>
+                            <input type="text" class="form-control @error('kontak_toko') is-invalid @enderror" id="kontak_toko" name="kontak_toko" value="{{ old('kontak_toko', $toko->kontak_toko) }}" required>
+                            @error('kontak_toko')
                                 <div class="invalid-feedback">{{ $message }}</div>
                             @enderror
                         </div>
-
                         <div class="mb-3">
                             <label for="gambar" class="form-label">Gambar</label>
                             <input type="file" class="form-control @error('gambar') is-invalid @enderror" id="gambar" name="gambar" accept="image/*">
+                            @if($toko->gambar)
+                                <small class="form-text text-muted">Biarkan kosong jika tidak ingin mengubah gambar. Gambar saat ini: <img src="{{ asset('storage/' . $toko->gambar) }}" alt="Gambar" width="50" height="50" class="rounded"></small>
+                            @endif
                             @error('gambar')
                                 <div class="invalid-feedback">{{ $message }}</div>
                             @enderror
                         </div>
-
                         <div class="d-flex justify-content-between">
-                            <a href="{{ route('admin.berita.index') }}" class="btn btn-secondary">Kembali</a>
+                            <a href="{{ route('admin.toko.index') }}" class="btn btn-secondary">Kembali</a>
                             <button type="submit" class="btn btn-primary">Simpan</button>
                         </div>
                     </form>

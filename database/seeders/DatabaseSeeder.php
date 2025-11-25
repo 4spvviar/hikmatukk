@@ -17,16 +17,18 @@ class DatabaseSeeder extends Seeder
         // User::factory(10)->create();
 
         User::create([
-            'name' => 'Hikmat',
-            'username' => 'AdminMts',
+            'nama' => 'Hikmat',
+            'kontak' => '00000000000',
+            'username' => 'AdminHikmat',
             'password' => bcrypt(1234),
             'role' => 'admin'
         ]);
         User::create([
-            'name' => 'Tiara Sani',
-            'username' => 'Operator1',
+            'nama' => 'Tiara Sani',
+            'kontak' => '00000000000',
+            'username' => 'MemberTiara',
             'password' => bcrypt(12345),
-            'role' => 'operator'
+            'role' => 'member'
         ]);
         profile_sekolah::create([
             'nama_sekolah' => 'MTsN 7 Tasikmalaya',

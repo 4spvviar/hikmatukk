@@ -1,4 +1,4 @@
-<footer style="background-color: #004715;" class="text-white pt-5 pb-4">
+<footer style="background-color: #1196ad;" class="text-white pt-5 pb-4">
     <div class="container">
         <div class="row gy-4">
 
@@ -27,16 +27,15 @@
             </div>
 
             {{-- Last News --}}
-            @if (isset($beritas) && $beritas->count() > 0)
+            @if (isset($gambarProduks) && $gambarProduks->count() > 0)
                 <div class="col-12 col-md-6 col-lg-4">
                     <h5 class="fw-bold mb-3">Last News</h5>
                     <ul class="list-unstyled">
-                        @foreach ($beritas->take(2) as $berita)
+                        @foreach ($gambarProduks->take(2) as $gambarProduk)
                             <li class="mb-3">
-                                <small>{{ $berita->tanggal }}</small>
-                                <h6 class="fw-bold" style="color: #f7b500">{{ $berita->judul }}</h6>
+                                <small>{{ $gambarProduk->tanggal }}</small>
+                                <h6 class="fw-bold" style="color: #f7b500">{{ $gambarProduk->judul }}</h6>
                                 <p class="text-white small mb-0">
-                                    Berikut ini pembagian ruang seleksi mata pelajaran pilihan...
                                 </p>
                             </li>
                         @endforeach

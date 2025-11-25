@@ -3,11 +3,11 @@
 
 <div class="container mt-4">
     <div class="d-flex justify-content-between align-items-center mb-3 px-2">
-        <h5 class="fw-bold text-dark">Data Berita</h5>
-        <a href="{{ route('admin.berita.create') }}"
+        <h5 class="fw-bold text-dark">Data Produk</h5>
+        <a href="{{ route('admin.produk.create') }}"
            class="btn btn-primary rounded-3 fw-bold"
            style="background:#0d47a1;">
-            <i class=""></i> Tambah
+            <i class=""></i>Tambah
         </a>
     </div>
 
@@ -31,40 +31,39 @@
                 <thead class="table-light">
                     <tr class="text-center">
                         <th width="5%">ID</th>
-                        <th>Judul</th>
-                        <th>Isi</th>
-                        <th>Tanggal</th>
+                        <th>Nama Produk</th>
+                        <th>Harga</th>
+                        <th>Stok</th>
+                        <th>Deskripsi</th>
                         <th width="10%">Gambar</th>
-                        <th>Penulis</th>
                         <th width="20%">Aksi</th>
                     </tr>
                 </thead>
                 <tbody>
-                    @forelse($beritas as $berita)
-                        <tr class="text-center align-middle">
-                            <td>{{ $berita->id_berita }}</td>
-                            <td class="">{{ Str::limit($berita->judul, 30) }}</td>
-                            <td class="">{{ Str::limit($berita->isi, 50) }}</td>
-                            <td class="">{{ $berita->tanggal }}</td>
+                    @forelse($produk as $item)
+                        <tr class="text-center">
+                            <td>{{ $item->id_produk }}</td>
+                            <td class="">{{ $item->nama_produk }}</td>
+                            <td class="">{{ $item->harga }}</td>
+                            <td class="">{{ $item->stok }}</td>
+                            <td class="">{{ Str::limit($item->deskripsi ?? 'Tidak ada', 50) }}</td>
                             <td class="">
-                                @if($berita->gambar)
-                                    <img src="{{ asset('storage/' . $berita->gambar) }}" alt="Gambar" width="120" height="20" class="img-thumbnail">
+                                @if($item->gambar)
+                                    <img src="{{ asset('storage/' . $item->gambar) }}" alt="Gambar" width="100" height="100" class="img-thumbnail">
                                 @else
                                     <span class="badge bg-secondary">Tidak ada</span>
                                 @endif
                             </td>
-                            <td class="">{{ $berita->user->name }}</td>
                             <td>
                                 <div class="d-flex justify-content-center gap-2">
-                                    <a href="{{ route('admin.berita.edit', Crypt::encrypt($berita->id_berita)) }}"
+                                    <a href="{{ route('admin.produk.edit', Crypt::encrypt($produk->id_produk)) }}"
                                        class="btn btn-sm btn-warning fw-bold"
                                        data-bs-toggle="tooltip" title="Edit">
-                                        <i class=""></i> Edit
+                                        <span class="fw-bold">Edit</span>
                                     </a>
-                                    <form action="{{ route('admin.berita.destroy', Crypt::encrypt($berita->id_berita)) }}"
+                                    <form action="{{ route('admin.produk.destroy', Crypt::encrypt($produk->id_produk)) }}"
                                           method="POST"
-                                          onsubmit="return confirm('Yakin ingin menghapus?')"
-                                          class="d-inline">
+                                          onsubmit="return confirm('Yakin ingin menghapus?')">
                                         @csrf
                                         @method('DELETE')
                                         <button type="submit"
@@ -77,8 +76,10 @@
                             </td>
                         </tr>
                     @empty
-                        <tr class="text-center">
-                            <td colspan="7">Tidak ada data berita.</td>
+                        <tr>
+                            <td colspan="7" class="text-center text-muted py-3">
+                                <i class="fa-solid fa-circle-info"></i> Belum Ada Data Produk
+                            </td>
                         </tr>
                     @endforelse
                 </tbody>
