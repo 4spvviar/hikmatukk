@@ -10,10 +10,10 @@ use App\Http\Controllers\TokoController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/',[Controller::class, 'home'])->name('layouts.home');
-Route::get('/guru',[Controller::class, 'guru'])->name('layouts.guru');
-Route::get('/berita/{id}', [Controller::class, 'beritaDetail'])->name('berita.detail');
+Route::get('/kategori',[Controller::class, 'kategori'])->name('layouts.kategori');
+Route::get('/gambarProduk', [Controller::class, 'gambarProduk'])->name('layouts.gambarProduk');
 Route::get('/galeri', [Controller::class, 'galeri'])->name('layouts.galeri');
-Route::get('/ekskul',[Controller::class, 'ekskul'])->name('layouts.ektrakulikuler');
+Route::get('/produk',[ProdukController::class, 'index'])->name('layouts.produk');
 Route::get('/tentang', [Controller::class, 'tentang'])->name('profile.tentang');
 Route::get('/visimisi', [Controller::class, 'visimisi'])->name('profile.visimisi');
 
@@ -30,7 +30,7 @@ Route::middleware(['admin'])->group(function (){
     //user
     Route::get('/admin/user', [AdminController::class, 'userView'])->name('admin.user.index');
     Route::get('/admin/user/create', [AdminController::class, 'userCreate'])->name('admin.user.create');
-    Route::post('/admin/user', [AdminController::class, 'userStore'])->name('admin.user.store');
+    Route::post('/admin/user', [AdminController::class, 'userStore'])->name('admin.user.store');    
     Route::get('/admin/user/edit/{id}',[AdminController::class,'editView'])->name('admin.user.edit');
     Route::put('/admin/user/edit/{id}',[AdminController::class, 'updateView'])->name('admin.user.update');
     Route::delete('/admin/user/{id}', [AdminController::class, 'userDestroy'])->name('admin.user.destroy');
@@ -90,28 +90,28 @@ Route::middleware(['member'])->group(function (){
     Route::get('/member/dashboard', [OperatorController::class, 'dashboard'])->name('operator.dashboard');
 
     //kategori
-    Route::get('/member/kategori', [OperatorController::class, 'siswaindex'])->name('operator.siswa.index');
-    Route::get('/member/kategori/create', [OperatorController::class, 'siswaCreate'])->name('operator.siswa.create');
-    Route::post('/member/kategori', [OperatorController::class, 'siswaStore'])->name('operator.siswa.store');
-    Route::get('/member/kategori/edit/{id}',[OperatorController::class,'siswaEdit'])->name('operator.siswa.edit');
-    Route::put('/member/kategori/edit/{id}',[OperatorController::class, 'siswaUpdate'])->name('operator.siswa.update');
-    Route::delete('/member/kategori/{id}', [OperatorController::class, 'siswaDestroy'])->name('operator.siswa.destroy');
+    Route::get('/member/kategori', [OperatorController::class, 'siswaindex'])->name('operator.kategori.index');
+    Route::get('/member/kategori/create', [OperatorController::class, 'siswaCreate'])->name('operator.kategori.create');
+    Route::post('/member/kategori', [OperatorController::class, 'siswaStore'])->name('operator.kategori.store');
+    Route::get('/member/kategori/edit/{id}',[OperatorController::class,'siswaEdit'])->name('operator.kategori.edit');
+    Route::put('/member/kategori/edit/{id}',[OperatorController::class, 'siswaUpdate'])->name('operator.kategori.update');
+    Route::delete('/member/kategori/{id}', [OperatorController::class, 'siswaDestroy'])->name('operator.kategori.destroy');
 
     //produk
-    Route::get('/member/produk', [OperatorController::class, 'ekstrakulikulerIndex'])->name('operator.ekstrakulikuler.index');
-    Route::get('/member/produk/create', [OperatorController::class, 'ekstrakulikulerCreate'])->name('operator.ekstrakulikuler.create');
-    Route::post('/member/produk', [OperatorController::class, 'ekstrakulikulerStore'])->name('operator.ekstrakulikuler.store');
-    Route::get('/member/produk/edit/{id}',[OperatorController::class,'ekstrakulikulerEdit'])->name('operator.ekstrakulikuler.edit');
-    Route::put('/member/produk/edit/{id}',[OperatorController::class, 'ekstrakulikulerUpdate'])->name('operator.ekstrakulikuler.update');
-    Route::delete('/member/produk/{id}', [OperatorController::class, 'ekstrakulikulerDestroy'])->name('operator.ekstrakulikuler.destroy');
+    Route::get('/member/produk', [OperatorController::class, 'ekstrakulikulerIndex'])->name('operator.produk.index');
+    Route::get('/member/produk/create', [OperatorController::class, 'ekstrakulikulerCreate'])->name('operator.produk.create');
+    Route::post('/member/produk', [OperatorController::class, 'ekstrakulikulerStore'])->name('operator.produk.store');
+    Route::get('/member/produk/edit/{id}',[OperatorController::class,'ekstrakulikulerEdit'])->name('operator.produk.edit');
+    Route::put('/member/produk/edit/{id}',[OperatorController::class, 'ekstrakulikulerUpdate'])->name('operator.produk.update');
+    Route::delete('/member/produk/{id}', [OperatorController::class, 'ekstrakulikulerDestroy'])->name('operator.produk.destroy');
 
     //gambarProduk
-    Route::get('/member/berita', [OperatorController::class, 'beritaIndex'])->name('operator.berita.index');
-    Route::get('/member/berita/create', [OperatorController::class, 'beritaCreate'])->name('operator.berita.create');
-    Route::post('/member/berita', [OperatorController::class, 'beritaStore'])->name('operator.berita.store');
-    Route::get('/member/berita/edit/{id}',[OperatorController::class,'beritaEdit'])->name('operator.berita.edit');
-    Route::put('/member/berita/edit/{id}',[OperatorController::class, 'beritaUpdate'])->name('operator.berita.update');
-    Route::delete('/member/berita/{id}', [OperatorController::class, 'beritaDestroy'])->name('operator.berita.destroy');
+    Route::get('/member/berita', [OperatorController::class, 'beritaIndex'])->name('operator.gambarProduk.index');
+    Route::get('/member/berita/create', [OperatorController::class, 'beritaCreate'])->name('operator.gambarProduk.create');
+    Route::post('/member/berita', [OperatorController::class, 'beritaStore'])->name('operator.gambarProduk.store');
+    Route::get('/member/berita/edit/{id}',[OperatorController::class,'beritaEdit'])->name('operator.gambarProduk.edit');
+    Route::put('/member/berita/edit/{id}',[OperatorController::class, 'beritaUpdate'])->name('operator.gambarProduk.update');
+    Route::delete('/member/berita/{id}', [OperatorController::class, 'beritaDestroy'])->name('operator.gambarProduk.destroy');
 
     //galeri
     Route::get('/member/galeri', [OperatorController::class, 'galeriIndex'])->name('operator.galeri.index');

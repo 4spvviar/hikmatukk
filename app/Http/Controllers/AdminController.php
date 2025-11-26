@@ -212,27 +212,32 @@ class AdminController extends Controller
         return view('admin.toko.create');
     }
 
-    public function tokoStore(Request $request)
-    {
-        $validated = $request->validate([
-            'id_toko' => 'required|string|max:10|unique:toko,id_toko',
-            'nama_toko' => 'required|string|max:40',
-            'deskripsi' => 'required|string|max:15|unique:toko,deskripsi',
-            'gambar' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
-            'id_user' => 'required|exists:users,id_user',
-            'kontak_toko' => 'required|string|max:13',
-            'alamat' => 'required|string',
-        ]);
+public function tokoStore(Request $request)
+{
+    $validated = $request->validate([
+        'nama_toko' => 'required|string|max:40',
+        'deskripsi' => 'required|string|max:255',
+        'gambar' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+        'kontak_toko' => 'required|string|max:13',
+        'alamat' => 'required|string',
+    ]);
 
-        if ($request->hasFile('gambar')) {
-            $gambarPath = $request->file('gambar')->store('toko_gambar', 'public');
-            $validated['gambar'] = $gambarPath;
-        }
+    // ID user diambil dari user yang login
+    $validated['id_user'] = Auth::user()->id_user;
 
-        Toko::create($validated);
-
-        return redirect()->route('admin.toko.index')->with('success', 'Toko berhasil ditambahkan.');
+    // Upload gambar (jika ada)
+    if ($request->hasFile('gambar')) {
+        $validated['gambar'] = $request->file('gambar')
+            ->store('toko_gambar', 'public');
     }
+
+    // Simpan data
+    Toko::create($validated);
+
+    return redirect()->route('admin.toko.index')
+            ->with('success', 'Toko berhasil ditambahkan.');
+}
+
 
     public function tokoEdit(string $id)
     {

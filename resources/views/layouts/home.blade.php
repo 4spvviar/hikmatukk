@@ -173,7 +173,7 @@
 @if(isset($admins) && $admins->count() > 0)
 <section class="py-5 bg-light">
     <div class="container">
-        <h2 class="text-center mb-4 fw-bold text-black">Admins</h2>
+        <h2 class="text-center mb-4 fw-bold text-black">Admin</h2>
         <div id="adminsCarousel" class="carousel slide" data-bs-ride="carousel">
             <div class="carousel-inner">
                 @foreach($admins->chunk(4) as $chunk)
@@ -217,7 +217,7 @@
 </section>
 @endif
 
-<!-- Data Admin & Members -->
+<!-- Data Produk & Data Produk Masih Tersedia -->
 <section class="py-5" style="background:#1196ad;">
     <div class="container">
         <h2 class="text-center mb-4 fw-bold text-white">Data Produk</h2>

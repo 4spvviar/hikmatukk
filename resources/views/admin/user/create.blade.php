@@ -37,7 +37,7 @@
                             <select class="form-control @error('role') is-invalid @enderror" id="role" name="role" required>
                                 <option value="">Pilih Role</option>
                                 <option value="admin" {{ old('role') == 'admin' ? 'selected' : '' }}>Admin</option>
-                                <option value="operator" {{ old('role') == 'operator' ? 'selected' : '' }}>Operator</option>
+                                <option value="member" {{ old('role') == 'member' ? 'selected' : '' }}>Member</option>
                             </select>
                             @error('role')
                                 <div class="invalid-feedback">{{ $message }}</div>

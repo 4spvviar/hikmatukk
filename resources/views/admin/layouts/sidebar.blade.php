@@ -114,13 +114,13 @@
             <a class="nav-link" href="{{ route('admin.user.index') }}"><i class="bi bi-person-circle"></i> User</a>
         </li>
         <li>
-            <a class="nav-link" href="{{ route('admin.kategori.index') }}"><i class="bi bi-person"></i> Kategori</a>
+            <a class="nav-link" href="{{ route('admin.kategori.index') }}"><i class="bi bi-card-list"></i> Kategori</a>
         </li>
         <li>
             <a class="nav-link" href="{{ route('admin.toko.index') }}"><i class="bi bi-person-badge"></i> Toko</a>
         </li>
         <li>
-            <a class="nav-link" href="{{ route('admin.produk.index') }}"><i class="bi bi-trophy"></i> Produk</a>
+            <a class="nav-link" href="{{ route('admin.produk.index') }}"><i class="fas fa-box"></i> Produk</a>
         </li>
         <li>
             <a class="nav-link" href="{{ route('admin.galeri.index') }}"><i class="bi bi-images"></i> Galeri</a>
@@ -129,7 +129,7 @@
           <a class="nav-link" href="{{ route('admin.gambarProduk.index') }}"><i class="bi bi-newspaper"></i> Gambar Produk</a>
         </li>
         <li>
-            <a class="nav-link" href="{{ route('admin.profile_sekolah.index') }}"><i class="bi bi-building"></i> Profile</a>
+            <a class="nav-link" href="{{ route('admin.profile_sekolah.index') }}"><i class="bi bi-person"></i> Profile</a>
         </li>
         <hr class="my-4" style="border-top: 3px solid rgb(255, 255, 255);">
         <li>

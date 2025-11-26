@@ -11,7 +11,7 @@
             @endif
 
             <span class="school-name">
-                {{ $profile->nama_sekolah ?? 'MtsN 7 Tasikmalaya' }}
+                {{ $profile->nama_sekolah ?? 'Marketplace' }}
             </span>
         </a>
 
@@ -29,13 +29,13 @@
                     <a class="nav-link text-dark fw-bold" href="{{ route('layouts.home') }}">Home</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link text-dark fw-bold" href="{{ route('layouts.guru') }}">Kategori</a>
+                    <a class="nav-link text-dark fw-bold" href="{{ route('layouts.kategori') }}">Kategori</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link text-dark fw-bold" href="{{ route('layouts.galeri') }}">Galeri</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link text-dark fw-bold" href="{{ route('layouts.ektrakulikuler') }}">Produk</a>
+                    <a class="nav-link text-dark fw-bold" href="{{ route('layouts.produk') }}">Produk</a>
                 </li>
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle text-dark fw-bold" href="#" id="profilDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">

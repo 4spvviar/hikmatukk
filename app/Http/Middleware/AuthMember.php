@@ -19,7 +19,7 @@ class AuthOperator
         if (!Auth::check()){
             return redirect('/auth/login');
         }
-        if (Auth::user()->role === 'operator'){
+        if (Auth::user()->role === 'member'){
             return $next($request);
         }
         if (Auth::user()->role === 'admin'){

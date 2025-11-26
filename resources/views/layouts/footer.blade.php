@@ -53,7 +53,6 @@
                                 <small>{{ $galeri->tanggal }}</small>
                                 <h6 class="fw-bold" style="color: #f7b500">{{ $galeri->judul }}</h6>
                                 <p class="text-white small mb-0">
-                                    Pembagian laporan hasil belajar siswa akan dilaksanakan...
                                 </p>
                             </li>
                         @endforeach

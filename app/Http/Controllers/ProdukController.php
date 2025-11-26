@@ -33,7 +33,7 @@ class ProdukController extends Controller
         $produks = $query->paginate(12);
         $kategoris = Kategori::all();
 
-        return view('produk.index', compact('produks', 'kategoris'));
+        return view('admin.produk.index', compact('produks', 'kategoris'));
     }
 
     public function show($id)

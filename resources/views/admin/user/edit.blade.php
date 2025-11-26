@@ -40,7 +40,7 @@
                             <label for="role" class="form-label">Role</label>
                             <select class="form-select" id="role" name="role" required>
                                 <option value="admin" {{ old('role', $users->role) == 'admin' ? 'selected' : '' }}>Admin</option>
-                                <option value="operator" {{ old('role', $users->role) == 'operator' ? 'selected' : '' }}>Operator</option>
+                                <option value="member" {{ old('role', $users->role) == 'member' ? 'selected' : '' }}>Member</option>
                             </select>
                         </div>
                         <button type="submit" class="btn btn-primary">Update</button>

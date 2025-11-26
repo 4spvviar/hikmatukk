@@ -31,7 +31,7 @@ class DatabaseSeeder extends Seeder
             'role' => 'member'
         ]);
         profile_sekolah::create([
-            'nama_sekolah' => 'MTsN 7 Tasikmalaya',
+            'nama_sekolah' => 'Marketplace',
             'kepala_sekolah' => 'Iki Alpian Hilmi',
             'foto'=>'logo.jpg',
             'logo'=>'mts7.jpeg',

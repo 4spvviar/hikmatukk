@@ -40,7 +40,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @forelse($produk as $item)
+                    @forelse($produks as $item)
                         <tr class="text-center">
                             <td>{{ $item->id_produk }}</td>
                             <td class="">{{ $item->nama_produk }}</td>

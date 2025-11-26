@@ -7,9 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Toko extends Model
 {
-    //
-
-     use HasFactory;
+    use HasFactory;
 
     protected $table = 'toko';
     protected $primaryKey = 'id_toko';

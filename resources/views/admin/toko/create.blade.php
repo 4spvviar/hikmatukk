@@ -11,38 +11,57 @@
                 <div class="card-body">
                     <form action="{{ route('admin.toko.store') }}" method="POST" enctype="multipart/form-data">
                         @csrf
+
                         <div class="mb-3">
                             <label for="nama_toko" class="form-label">Nama Toko</label>
-                            <input type="text" class="form-control @error('nama_toko') is-invalid @enderror" id="nama_toko" name="nama_toko" value="{{ old('nama_toko') }}" required>
+                            <input type="text" class="form-control @error('nama_toko') is-invalid @enderror"
+                                   id="nama_toko" name="nama_toko" value="{{ old('nama_toko') }}" required>
                             @error('nama_toko')
                                 <div class="invalid-feedback">{{ $message }}</div>
                             @enderror
                         </div>
+
                         <div class="mb-3">
                             <label for="deskripsi" class="form-label">Deskripsi</label>
-                            <input type="text" class="form-control @error('deskripsi') is-invalid @enderror" id="deskripsi" name="deskripsi" value="{{ old('deskripsi') }}" required>
+                            <input type="text" class="form-control @error('deskripsi') is-invalid @enderror"
+                                   id="deskripsi" name="deskripsi" value="{{ old('deskripsi') }}" required>
                             @error('deskripsi')
                                 <div class="invalid-feedback">{{ $message }}</div>
                             @enderror
                         </div>
+
                         <div class="mb-3">
                             <label for="kontak_toko" class="form-label">Kontak Toko</label>
-                            <input type="text" class="form-control @error('kontak_toko') is-invalid @enderror" id="kontak_toko" name="kontak_toko" value="{{ old('kontak_toko') }}" required>
+                            <input type="text" class="form-control @error('kontak_toko') is-invalid @enderror"
+                                   id="kontak_toko" name="kontak_toko" value="{{ old('kontak_toko') }}" required>
                             @error('kontak_toko')
                                 <div class="invalid-feedback">{{ $message }}</div>
                             @enderror
                         </div>
+
                         <div class="mb-3">
                             <label for="gambar" class="form-label">Gambar</label>
-                            <input type="file" class="form-control @error('gambar') is-invalid @enderror" id="gambar" name="gambar" accept="image/*">
+                            <input type="file" class="form-control @error('gambar') is-invalid @enderror"
+                                   id="gambar" name="gambar" accept="image/*">
                             @error('gambar')
                                 <div class="invalid-feedback">{{ $message }}</div>
                             @enderror
                         </div>
+
+                        <div class="mb-3">
+                            <label for="alamat" class="form-label">Alamat</label>
+                            <textarea class="form-control @error('alamat') is-invalid @enderror"
+                                      id="alamat" name="alamat" rows="3" required>{{ old('alamat') }}</textarea>
+                            @error('alamat')
+                                <div class="invalid-feedback">{{ $message }}</div>
+                            @enderror
+                        </div>
+
                         <div class="d-flex justify-content-between">
                             <a href="{{ route('admin.toko.index') }}" class="btn btn-secondary">Kembali</a>
                             <button type="submit" class="btn btn-primary">Simpan</button>
                         </div>
+
                     </form>
                 </div>
             </div>
